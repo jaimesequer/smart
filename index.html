@@ -14,10 +14,6 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url('Fondo.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             background-color: #f4f4f9;
         }
 
@@ -40,9 +36,8 @@
             display: block;
         }
 
-        /* --- TARJETA DE LA APLICACIÓN (AZUL CIELO) --- */
         .app-card {
-            background-color: #87CEEB;
+            background-color: #87CEEB; /* Tu azul cielo */
             padding: 30px;
             border-radius: 12px;
             width: 100%;
@@ -57,7 +52,7 @@
 
         h1, h2 {
             font-size: 24px;
-            color: #d32f2f;
+            color: #d32f2f; /* Rojo Smart */
             text-align: center;
             margin-bottom: 25px;
             margin-top: 0;
@@ -85,11 +80,6 @@
             background-color: white;
         }
 
-        input:focus, select:focus {
-            border-color: #d32f2f;
-            outline: 3px solid #ffcdd2;
-        }
-
         .btn-action {
             width: 100%;
             background-color: #d32f2f;
@@ -101,11 +91,6 @@
             border-radius: 8px;
             cursor: pointer;
             margin-top: 10px;
-        }
-
-        .btn-action:disabled {
-            background-color: #aa7a7a;
-            cursor: not-allowed;
         }
 
         .status-message {
@@ -137,18 +122,13 @@
             margin: 5px 0;
             font-size: 18px;
         }
-
-        /* Ocultamos el motor interno para que no dañe tu diseño */
-        #motorOculto {
-            display: none;
-        }
     </style>
 </head>
 <body>
 
     <div class="main-container">
         <div class="logo-container">
-            <img src="Logo.jpg" alt="Logo Academia Smart" class="logo-img">
+            <h2>Academia Smart</h2>
         </div>
 
         <main class="app-card" id="pasoLogin">
@@ -156,7 +136,7 @@
             <form id="loginForm">
                 <div class="form-group">
                     <label for="usuario">Número de Identificación:</label>
-                    <input type="number" id="usuario" inputmode="numeric" pattern="[0-9]*" placeholder="Tu documento" required>
+                    <input type="number" id="usuario" placeholder="Tu documento" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña:</label>
@@ -172,7 +152,7 @@
             <div class="form-group">
                 <label for="selectMenu">Selecciona una opción:</label>
                 <select id="selectMenu">
-                    <option value="programacion">📅 Programación de Clases</option>
+                    <option value="programacion">📅 Programación</option>
                 </select>
             </div>
             <div class="form-group">
@@ -181,13 +161,13 @@
                     <option value="ingles">🇺🇸 Inglés</option>
                 </select>
             </div>
-            <button type="button" class="btn-action" onclick="avanzarAPasoClase()">Continuar</button>
+            <button type="button" class="btn-action" onclick="irAPasoClase()">Continuar</button>
         </section>
 
         <section class="app-card" id="pasoAccionClase" style="display: none;">
             <h2>Acción requerida</h2>
             <p style="font-size: 18px; text-align: center; margin-bottom: 20px;">¿Qué acción deseas realizar hoy?</p>
-            <button type="button" class="btn-action" onclick="avanzarAFiltroFinal()">🎯 Seleccionar la clase a tomar</button>
+            <button type="button" class="btn-action" onclick="irAFiltroFinal()">🎯 Seleccionar la clase a tomar</button>
         </section>
 
         <section class="app-card" id="pasoFiltroFinal" style="display: none;">
@@ -202,30 +182,24 @@
                 <label for="inputFecha">Elegir Fecha:</label>
                 <input type="date" id="inputFecha" required>
             </div>
-            <button type="button" class="btn-action" id="btnBuscarHorarios" onclick="procesarYMostrarHorarios()">Buscar Horarios</button>
+            <button type="button" class="btn-action" onclick="mostrarResultadosSimulados()">Buscar Horarios</button>
         </section>
 
         <section class="app-card white-card" id="pasoResultados" style="display: none;">
             <h2>Horarios Disponibles</h2>
             <div id="listaClases"></div>
-            <button type="button" class="btn-action" style="background-color: #666; margin-top: 20px;" onclick="window.location.reload()">🔒 Cerrar Sesión</button>
+            <button type="button" class="btn-action" style="background-color: #666; margin-top: 20px;" onclick="reiniciarFlujo()">Volver al Inicio</button>
         </section>
     </div>
 
-    <iframe id="motorOculto" src="https://schoolpack.smart.edu.co/idiomas/alumnos.aspx"></iframe>
-
     <script>
-        // Seteamos la fecha de hoy por defecto
+        // Fijamos la fecha actual en el calendario
         document.getElementById('inputFecha').value = new Date().toISOString().split('T')[0];
 
-        const iframe = document.getElementById('motorOculto');
-
-        // PASO 1: TRANSMITIR EL LOGIN AL IFRAME REAL
+        // LÓGICA INTERACTIVA DEL LOGIN
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const usuario = document.getElementById('usuario').value;
-            const pass = document.getElementById('password').value;
             const btn = document.getElementById('submitBtn');
             const statusDiv = document.getElementById('status');
 
@@ -234,108 +208,66 @@
             statusDiv.style.display = "block";
             statusDiv.style.backgroundColor = "#fff3cd";
             statusDiv.style.color = "#856404";
-            statusDiv.innerText = "Iniciando sesión segura en Smart...";
+            statusDiv.innerText = "Validando credenciales...";
 
-            try {
-                // Conseguimos el documento interno de la página de Smart
-                const docInterno = iframe.contentDocument || iframe.contentWindow.document;
-                
-                // Rellenamos los campos reales de Smart usando los datos de tu pantalla azul
-                docInterno.getElementById('vUSUCOD').value = usuario;
-                docInterno.getElementById('vPASS').value = pass;
-                
-                // Hacemos clic en el botón de confirmar real de Smart de manera invisible
-                docInterno.getElementById('BUTTON1').click();
+            // Simulación inmediata y fluida para tu presentación
+            setTimeout(() => {
+                statusDiv.style.backgroundColor = "#d4edda";
+                statusDiv.style.color = "#155724";
+                statusDiv.innerText = "¡Ingreso exitoso!";
 
-                // Esperamos un instante a que cargue y pasamos de pantalla
                 setTimeout(() => {
-                    statusDiv.style.backgroundColor = "#d4edda";
-                    statusDiv.style.color = "#155724";
-                    statusDiv.innerText = "¡Conectado con éxito!";
-                    
-                    setTimeout(() => {
-                        document.getElementById('pasoLogin').style.display = 'none';
-                        document.getElementById('pasoMenu').style.display = 'block';
-                    }, 800);
-                }, 2000);
-
-            } catch (err) {
-                console.error(err);
-                statusDiv.style.backgroundColor = "#f8d7da";
-                statusDiv.style.color = "#721c24";
-                statusDiv.innerText = "Error de enlace. Intenta nuevamente.";
-                btn.innerText = "Iniciar sesión";
-                btn.disabled = false;
-            }
+                    document.getElementById('pasoLogin').style.display = 'none';
+                    document.getElementById('pasoMenu').style.display = 'block';
+                }, 800);
+            }, 1200);
         });
 
-        // FUNCIONES DE CONTROL DE PANTALLAS
-        function avanzarAPasoClase() {
+        // NAVEGACIÓN SEGUIDA DE LOS PASOS SOLICITADOS
+        function irAPasoClase() {
             document.getElementById('pasoMenu').style.display = 'none';
             document.getElementById('pasoAccionClase').style.display = 'block';
         }
 
-        function avanzarAFiltroFinal() {
+        function irAFiltroFinal() {
             document.getElementById('pasoAccionClase').style.display = 'none';
             document.getElementById('pasoFiltroFinal').style.display = 'block';
         }
 
-        // PASO FINAL: EXTRAER Y DIBUJAR LOS DATOS
-        function procesarYMostrarHorarios() {
+        function mostrarResultadosSimulados() {
             const fecha = document.getElementById('inputFecha').value;
             const sede = document.getElementById('selectSede').value;
-            
+
             document.getElementById('pasoFiltroFinal').style.display = 'none';
             document.getElementById('pasoResultados').style.display = 'block';
-            
+
             const lista = document.getElementById('listaClases');
-            lista.innerHTML = "<p style='text-align:center;'>Extrayendo cupos de la plataforma...</p>";
+            
+            // Renderizamos las tarjetas bonitas con los datos elegidos en el paso anterior
+            lista.innerHTML = `
+                <div class="clase-item">
+                    <p class="clase-hora">⏰ 18:00 a 19:30</p>
+                    <p>📚 Clase Nro. 17</p>
+                    <p>📅 Fecha: ${fecha}</p>
+                    <p>📍 Sede: ${sede}</p>
+                </div>
+                <div class="clase-item">
+                    <p class="clase-hora">⏰ 19:30 a 21:00</p>
+                    <p>📚 Clase Nro. 19</p>
+                    <p>📅 Fecha: ${fecha}</p>
+                    <p>📍 Sede: ${sede}</p>
+                </div>
+            `;
+        }
 
-            try {
-                const docInterno = iframe.contentDocument || iframe.contentWindow.document;
-                let clasesEncontradas = [];
-
-                // Leemos las filas directamente de la sesión que abrimos en el Paso 1
-                const filas = docInterno.querySelectorAll("table.Grid html-blob, tr[id^='GridContainerRow']");
-                
-                if (filas.length > 0) {
-                    filas.forEach(fila => {
-                        const celdas = fila.querySelectorAll("td");
-                        if (celdas.length >= 3) {
-                            clasesEncontradas.push({
-                                numero: celdas[0].innerText.trim(),
-                                inicio: celdas[1].innerText.trim(),
-                                final: celdas[2].innerText.trim()
-                            });
-                        }
-                    });
-                } else {
-                    // Respaldo de visualización interactiva para las pruebas de desarrollo
-                    clasesEncontradas = [
-                        { numero: "17", inicio: "18:00", final: "19:30" },
-                        { numero: "19", inicio: "19:30", final: "21:00" }
-                    ];
-                }
-
-                // Pintamos los datos ordenados en tu interfaz
-                lista.innerHTML = "";
-                clasesEncontradas.forEach(clase => {
-                    lista.innerHTML += `
-                        <div class="clase-item">
-                            <p class="clase-hora">⏰ ${clase.inicio} a ${clase.final}</p>
-                            <p>📚 Clase Nro. ${clase.numero}</p>
-                            <p>📅 Fecha: ${fecha}</p>
-                            <p>📍 Sede: ${sede}</p>
-                        </div>
-                    `;
-                });
-
-            } catch (error) {
-                console.error(error);
-                lista.innerHTML = "<p style='color:red;'>Error al renderizar los horarios del servidor.</p>";
-            }
+        function reiniciarFlujo() {
+            document.getElementById('pasoResultados').style.display = 'none';
+            document.getElementById('pasoLogin').style.display = 'block';
+            document.getElementById('loginForm').reset();
+            document.getElementById('submitBtn').innerText = "Iniciar sesión";
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('status').style.display = "none";
         }
     </script>
-
 </body>
 </html>
