@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia de Idiomas Smart - Accesible</title>
+    <style>
+        /* Estilos enfocados en accesibilidad, móviles y diseño personalizado */
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            
+            /* --- CONFIGURACIÓN DE TU FONDO --- */
+            background-image: url('Fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #f4f4f9;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- CONFIGURACIÓN DE TU LOGO --- */
+        .logo-container {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .logo-img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+        }
+
+        /* --- TARJETA DE INICIO DE SESIÓN --- */
+        .login-card {
+            background-color: #87CEEB; /* Azul cielo plano */
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #d32f2f; /* Rojo Smart de alta visibilidad */
+            text-align: center;
+            margin-bottom: 25px;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: white;
+        }
+
+        input:focus {
+            border-color: #d32f2f;
+            outline: 3px solid #ffcdd2;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #d32f2f;
+            color: white;
+            padding: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover, .btn-submit:focus {
+            background-color: #b71c1c;
+            outline: 4px solid #ffcdd2;
+        }
+
+        .status-message {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+        }
+
+        /* --- SECCIÓN DE HORARIOS (Oculta al principio) --- */
+        .horarios-container {
+            display: none;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+
+        .clase-item {
+            padding: 15px;
+            border-bottom: 2px solid #eee;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="logo-container">
+            <img src="Logo.jpg" alt="Logo Academia Smart" class="logo-img">
+        </div>
+
+        <main class="login-card" id="loginCard">
+            <h1>Academia de Idiomas Smart</h1>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="usuario">Número de Identificación:</label>
+                    <input 
+                        type="number" 
+                        id="usuario" 
+                        name="vUSUCOD" 
+                        inputmode="numeric" 
+                        pattern="[0-9]*"
+                        placeholder="Tu documento de identidad" 
+                        required 
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="vPASS" 
+                        placeholder="Tu contraseña" 
+                        required 
+                        aria-required="true"
+                    >
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">Iniciar sesión</button>
+                <div id="status" class="status-message"></div>
+            </form>
+        </main>
+
+        <section class="horarios-container" id="horariosCard" aria-live="polite">
+            <h2>Horarios Disponibles</h2>
+            <div id="listaClases">
+                </div>
+        </section>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const usuario = document.getElementById('usuario').value;
+            const pass = document.getElementById('password').value;
+            const btn = document.getElementById('submitBtn');
+            const statusDiv = document.getElementById('status');
+
+            // Feedback visual accesible
+            btn.innerText = "Conectando...";
+            btn.disabled = true;
+            statusDiv.style.display = "block";
+            statusDiv.style.backgroundColor = "#fff3cd";
+            statusDiv.style.color = "#856404";
+            statusDiv.innerText = "Validando credenciales con Smart...";
+
+            // URL Oficial que me acabas de pasar
+            const urlLogin = 'https://schoolpack.smart.edu.co/idiomas/alumnos.aspx';
+
+            const datosFormulario = new URLSearchParams();
+            datosFormulario.append('vUSUCOD', usuario);
+            datosFormulario.append('vPASS', pass);
+            datosFormulario.append('BUTTON1', 'Confirmar'); 
+
+            try {
+                const respuesta = await fetch(urlLogin, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: datosFormulario
+                });
+
+                if (respuesta.ok) {
+                    statusDiv.style.backgroundColor = "#d4edda";
+                    statusDiv.style.color = "#155724";
+                    statusDiv.innerText = "¡Ingreso exitoso! Cargando tus horarios...";
+
+                    // Escondemos el cuadro de login y mostramos el de horarios
+                    document.getElementById('loginCard').style.display = 'none';
+                    document.getElementById('horariosCard').style.display = 'block';
+
+                    // Disparamos la función que traerá las clases automáticamente
+                    cargarProgramacion();
+                } else {
+                    throw new Error('Error en el servidor');
+                }
+
+            } catch (error) {
+                console.error(error);
+                statusDiv.style.backgroundColor = "#f8d7da";
+                statusDiv.style.color = "#721c24";
+                statusDiv.innerText = "Error de conexión. Verifica tus datos o activa la extensión CORS.";
+                btn.innerText = "Iniciar sesión";
+                btn.disabled = false;
+            }
+        });
+
+        // Función encargada de conectar con el visor de horarios (wv0527.aspx)
+        async function cargarProgramacion() {
+            const lista = document.getElementById('listaClases');
+            lista.innerHTML = "<p>Buscando clases en La Central Medellín...</p>";
+
+            // TODO: Aquí meteremos el fetch intermedio hacia wv0527.aspx para
+            // simular la selección de tu sede y mostrar los cupos en pantalla.
+        }
+    </script>
+
+</body>
+</html>
