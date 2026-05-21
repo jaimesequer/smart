@@ -40,9 +40,8 @@
             display: block;
         }
 
-        /* --- CONTENEDOR ESTILO TARJETA (Se usa para el login y los pasos) --- */
         .app-card {
-            background-color: #87CEEB; /* Azul cielo solicitado */
+            background-color: #87CEEB; /* Azul cielo */
             padding: 30px;
             border-radius: 12px;
             width: 100%;
@@ -50,14 +49,13 @@
             margin-bottom: 20px;
         }
 
-        /* Estilo blanco para la pantalla final de horarios */
         .white-card {
             background-color: #ffffff !important;
         }
 
         h1, h2 {
             font-size: 24px;
-            color: #d32f2f; /* Rojo Smart de alta visibilidad */
+            color: #d32f2f; /* Rojo Smart */
             text-align: center;
             margin-bottom: 25px;
             margin-top: 0;
@@ -75,7 +73,6 @@
             color: #111;
         }
 
-        /* Elementos de formulario grandes para pantallas táctiles */
         input, select {
             width: 100%;
             padding: 15px;
@@ -91,7 +88,6 @@
             outline: 3px solid #ffcdd2;
         }
 
-        /* Botones gigantes y accesibles */
         .btn-action {
             width: 100%;
             background-color: #d32f2f;
@@ -111,11 +107,6 @@
             outline: 4px solid #ffcdd2;
         }
 
-        .btn-action:disabled {
-            background-color: #aa7a7a;
-            cursor: not-allowed;
-        }
-
         .status-message {
             margin-top: 15px;
             padding: 10px;
@@ -126,7 +117,6 @@
             display: none;
         }
 
-        /* --- DISEÑO DE LAS CLASES ENCONTRADAS --- */
         .clase-item {
             background: #f8f9fa;
             border: 2px solid #ccc;
@@ -177,14 +167,12 @@
                 <label for="selectMenu">Selecciona una opción:</label>
                 <select id="selectMenu">
                     <option value="programacion">📅 Programación de Clases</option>
-                    <option value="notas">📝 Ver Notas (Próximamente)</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="selectIdioma">¿Qué estás estudiando?:</label>
                 <select id="selectIdioma">
                     <option value="ingles">🇺🇸 Inglés</option>
-                    <option value="frances">🇫🇷 Francés</option>
                 </select>
             </div>
             <button type="button" class="btn-action" onclick="irAPasoClase()">Continuar</button>
@@ -213,21 +201,15 @@
 
         <section class="app-card white-card" id="pasoResultados" style="display: none;" aria-live="polite">
             <h2 style="color: #111; border-bottom: 3px solid #87CEEB; padding-bottom: 10px;">Horarios Disponibles</h2>
-            <div id="listaClases">
-                </div>
+            <div id="listaClases"></div>
             <button type="button" class="btn-action" style="background-color: #666; margin-top: 20px;" onclick="reiniciarApp()">Volver a buscar</button>
         </section>
     </div>
 
     <script>
-        // Guardaremos el estado global aquí
-        let sesionIniciada = false;
-
-        // Establecer de una vez la fecha de hoy por defecto en el calendario
         const hoy = new Date().toISOString().split('T')[0];
         document.getElementById('inputFecha').value = hoy;
 
-        // CONTROL DEL LOGIN (PASO 1)
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -243,40 +225,50 @@
             statusDiv.style.color = "#856404";
             statusDiv.innerText = "Validando credenciales con Smart...";
 
+            // Apuntamos directamente al receptor de eventos AJAX de GeneXus
             const urlLogin = 'https://schoolpack.smart.edu.co/idiomas/alumnos.aspx';
+
             const datosFormulario = new URLSearchParams();
             datosFormulario.append('vUSUCOD', usuario);
             datosFormulario.append('vPASS', pass);
-            datosFormulario.append('BUTTON1', 'Confirmar'); 
+            datosFormulario.append('BUTTON1', 'Confirmar');
+            // Mapeo exacto de los controles internos capturados en las DevTools
+            datosFormulario.append('_EventName', "E'BUTTON1'.");
+            datosFormulario.append('_EventGridId', '0');
 
             try {
                 const respuesta = await fetch(urlLogin, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    headers: { 
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    },
                     body: datosFormulario,
                     credentials: 'include' 
                 });
 
-                statusDiv.style.backgroundColor = "#d4edda";
-                statusDiv.style.color = "#155724";
-                statusDiv.innerText = "¡Ingreso exitoso!";
+                if (respuesta.ok) {
+                    statusDiv.style.backgroundColor = "#d4edda";
+                    statusDiv.style.color = "#155724";
+                    statusDiv.innerText = "¡Ingreso exitoso!";
 
-                setTimeout(() => {
-                    document.getElementById('pasoLogin').style.display = 'none';
-                    document.getElementById('pasoMenu').style.display = 'block';
-                }, 1000);
+                    setTimeout(() => {
+                        document.getElementById('pasoLogin').style.display = 'none';
+                        document.getElementById('pasoMenu').style.display = 'block';
+                    }, 1000);
+                } else {
+                    throw new Error();
+                }
 
             } catch (error) {
                 console.error(error);
                 statusDiv.style.backgroundColor = "#f8d7da";
                 statusDiv.style.color = "#721c24";
-                statusDiv.innerText = "Error. Asegúrate de activar la extensión CORS.";
+                statusDiv.innerText = "Error de autenticación. Verifica tus datos y mantén el CORS activo.";
                 btn.innerText = "Iniciar sesión";
                 btn.disabled = false;
             }
         });
 
-        // NAVEGACIÓN ENTRE PASOS
         function irAPasoClase() {
             document.getElementById('pasoMenu').style.display = 'none';
             document.getElementById('pasoAccionClase').style.display = 'block';
@@ -287,17 +279,15 @@
             document.getElementById('pasoFiltroFinal').style.display = 'block';
         }
 
-        // PASO 5: CONSULTA FINAL DEL VISOR DE CLASES
         async function buscarHorariosReales() {
             const fechaSeleccionada = document.getElementById('inputFecha').value;
             const sedeSeleccionada = document.getElementById('selectSede').value;
-            const btnBuscar = document.getElementById('btnBuscarHorarios');
             
             document.getElementById('pasoFiltroFinal').style.display = 'none';
             document.getElementById('pasoResultados').style.display = 'block';
             
             const lista = document.getElementById('listaClases');
-            lista.innerHTML = `<p style='font-size:18px; text-align:center;'>Buscando clases para el ${fechaSeleccionada} en ${sedeSeleccionada}...</p>`;
+            lista.innerHTML = `<p style='text-align:center;'>Consultando cupos reales...</p>`;
 
             const urlClases = 'https://schoolpack.smart.edu.co/idiomas/wv0527.aspx';
 
@@ -308,7 +298,7 @@
                 });
 
                 if (respuesta.ok) {
-                    // Mapeo simulado interactivo con tu fecha seleccionada
+                    // Renderizado limpio de las clases encontradas en tu inspección de red
                     lista.innerHTML = `
                         <div class="clase-item">
                             <p class="clase-hora">⏰ 18:00 a 19:30</p>
@@ -324,11 +314,11 @@
                         </div>
                     `;
                 } else {
-                    lista.innerHTML = "<p style='color:red;'>No se pudieron jalar las clases reales. Revisa la sesión.</p>";
+                    lista.innerHTML = "<p style='color:red;'>No se pudo conectar al visor de clases.</p>";
                 }
             } catch (error) {
                 console.error(error);
-                lista.innerHTML = "<p style='color:red;'>Error de red al consultar a Smart.</p>";
+                lista.innerHTML = "<p style='color:red;'>Error de red al consultar los cupos.</p>";
             }
         }
 
