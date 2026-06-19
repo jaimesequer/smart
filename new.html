@@ -88,22 +88,23 @@ const precioUsdtInput = document.getElementById("precio_usdt");
 const vedFormatter = new Intl.NumberFormat('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 async function actualizarBCV() {
-    // Usamos el modo "no-cors" si el acceso directo falla por seguridad
-    const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQXwjW4RSRaHFnIqwZYnziVxz45zuaUhIU3NNOE78DyYOOZApEky98I5pgDi4auLTlCWLEHuFrkyYs3/pub?gid=0&single=true&output=csv';
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQXwjW4RSRaHFnIqwZYnziVxz45zuaUhIU3NNOE78DyYOOZApEky98I5pgDi4auLTlCWLEHuFrkyYs3/pub?gid=0&single=true&output=csv';
+    // Usamos un Proxy para evitar el bloqueo CORS
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(sheetUrl)}`;
     
     try {
-        const response = await fetch(url);
-        const data = await response.text();
+        const response = await fetch(proxyUrl);
+        const json = await response.json();
+        const data = json.contents;
         const lineas = data.split('\n');
         
         if (lineas.length > 1) {
-            // Limpieza básica: tomamos la celda A2
+            // Limpieza: extraemos y quitamos comillas
             let valor = lineas[1].split(',')[0].replace(/"/g, '').trim();
             dolarBcvInput.value = valor;
         }
     } catch (e) {
-        // Si hay error, intentamos una segunda vez o mostramos una pista
-        dolarBcvInput.value = "Error de red";
+        dolarBcvInput.value = "Error al conectar";
     }
 }
 
@@ -131,7 +132,6 @@ copInput.addEventListener("input", (e) => {
 
 precioUsdtInput.addEventListener("input", calcular);
 
-// Llamada inicial
 actualizarBCV();
 </script>
 
