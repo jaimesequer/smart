@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Cambios COP & VED</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
   body {
@@ -38,31 +37,18 @@
   }
 
   input[readonly] { background: #1c2a44; color: #9ca3af; }
-  .spacer { flex-grow: 1; min-height: 50px; }
-
-  .btn-share {
-    background: #10b981;
-    color: white;
-    padding: 14px;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 20px;
-    border: none;
-    font-size: 16px;
-  }
+  .spacer { flex-grow: 1; min-height: 100px; }
 </style>
 </head>
 
 <body>
 
-<div class="app" id="capture-area">
+<div class="app">
   <h1>Cambios COP & VED</h1>
 
   <div class="card">
     <label>COP</label>
-    <input type="text" id="cop" placeholder="Ej: 100.000">
+    <input type="number" id="cop" placeholder="Ej: 100000">
   </div>
 
   <div class="card">
@@ -82,65 +68,52 @@
     <input type="text" id="usd" readonly>
   </div>
 
-  <div class="card" id="precio-container">
+  <div class="card">
     <label>Precio USDT</label>
     <input type="number" id="precio_usdt" placeholder="Ingresa precio">
   </div>
-
-  <button id="btn-share" class="btn-share" onclick="tomarCaptura()">Compartir Pantalla</button>
 </div>
 
 <script>
 const copInput = document.getElementById("cop");
 const vedInput = document.getElementById("ved");
 const tasaInput = document.getElementById("tasa");
+const usdInput = document.getElementById("usd");
 const precioUsdtInput = document.getElementById("precio_usdt");
-const precioContainer = document.getElementById("precio-container");
-const btnShare = document.getElementById("btn-share");
 
-function parseNumber(str) { return parseFloat(str.replace(/\./g, '').replace(',', '.')) || 0; }
+const vedFormatter = new Intl.NumberFormat('es-CO', { 
+  minimumFractionDigits: 2, 
+  maximumFractionDigits: 2 
+});
 
 function calcular() {
-    const copVal = parseNumber(copInput.value);
+    // Al ser un input number, obtenemos el valor directo sin necesidad de parsear puntos
+    const copVal = parseFloat(copInput.value) || 0;
     const precioUsdtVal = parseFloat(precioUsdtInput.value) || 0;
+
     if (copVal > 0) {
         const usdVal = copVal / 4400;
+        usdInput.value = usdVal.toFixed(2);
+
         if (precioUsdtVal > 0) {
             const vedVal = usdVal * precioUsdtVal;
-            vedInput.value = new Intl.NumberFormat('es-CO').format(vedVal);
+            vedInput.value = vedFormatter.format(vedVal);
             tasaInput.value = (vedVal / copVal).toFixed(4);
+        } else {
+            vedInput.value = "";
+            tasaInput.value = "";
         }
+    } else {
+        vedInput.value = "";
+        usdInput.value = "";
+        tasaInput.value = "";
     }
 }
 
-function tomarCaptura() {
-    // 1. Ocultamos el contenedor del precio
-    precioContainer.style.display = "none";
-    btnShare.style.display = "none";
-
-    // 2. Tomamos la captura de toda la app
-    html2canvas(document.querySelector("#capture-area"), {
-        backgroundColor: null,
-        logging: false
-    }).then(canvas => {
-        // 3. Descargamos la captura
-        const link = document.createElement('a');
-        link.download = 'mi-calculo.png';
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-
-        // 4. Restauramos la vista
-        precioContainer.style.display = "block";
-        btnShare.style.display = "block";
-    });
-}
-
-copInput.addEventListener("input", (e) => {
-    let val = e.target.value.replace(/\D/g, "");
-    e.target.value = val.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    calcular();
-});
+// Escuchamos el evento input para recalcular al escribir
+copInput.addEventListener("input", calcular);
 precioUsdtInput.addEventListener("input", calcular);
 </script>
+
 </body>
 </html>
