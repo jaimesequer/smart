@@ -6,16 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  body { margin: 0; font-family: Arial, sans-serif; background: url('fondo.jpg') no-repeat center center fixed; background-size: cover; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-  .app { width: 100%; max-width: 420px; height: 90vh; padding: 18px; background: rgba(11, 18, 32, 0.7); display: flex; flex-direction: column; overflow-y: auto; border-radius: 20px; backdrop-filter: blur(5px); }
-  h1 { text-align: center; font-size: 28px; margin-top: 10px; margin-bottom: 30px; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-  .card { background: rgba(17, 27, 46, 0.7); padding: 14px; border-radius: 12px; margin-bottom: 15px; }
-  label { display: block; font-size: 12px; opacity: 0.9; margin-bottom: 4px; }
-  .center-label { text-align: center; font-size: 18px !important; font-weight: bold; opacity: 1 !important; }
-  .large-input { font-size: 24px !important; text-align: center; font-weight: bold; }
-  input { width: 100%; padding: 12px; border-radius: 8px; border: none; font-size: 16px; outline: none; box-sizing: border-box; }
-  input[readonly] { background: #1c2a44; color: #fff; }
-  .push-down { margin-top: 150px; }
+  body { margin: 0; font-family: Arial, sans-serif; background: #0b1220; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+  .app { width: 100%; max-width: 420px; height: 90vh; padding: 18px; background: rgba(17, 27, 46, 0.9); display: flex; flex-direction: column; overflow-y: auto; border-radius: 20px; }
+  h1 { text-align: center; font-size: 24px; margin-bottom: 20px; }
+  .card { background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+  label { display: block; font-size: 12px; opacity: 0.8; margin-bottom: 5px; text-align: center; font-weight: bold; }
+  .large-input { font-size: 22px; text-align: center; font-weight: bold; width: 100%; padding: 10px; border-radius: 8px; border: none; background: #1c2a44; color: white; box-sizing: border-box; }
+  .push-down { flex-grow: 1; }
 </style>
 </head>
 
@@ -23,26 +20,32 @@
 
 <div class="app">
   <h1>Cambios COP & VED</h1>
+
   <div class="card">
-    <label class="center-label">COP</label>
+    <label>COP</label>
     <input type="text" id="cop" class="large-input" inputmode="decimal" placeholder="0">
   </div>
+
   <div class="card">
-    <label class="center-label">VED</label>
+    <label>VED</label>
     <input type="text" id="ved" class="large-input" readonly>
   </div>
+
   <div class="card">
-    <label class="center-label">Tasa</label>
+    <label>Tasa</label>
     <input type="text" id="tasa" class="large-input" readonly>
   </div>
+
   <div class="card">
-    <label class="center-label">Dólar BCV</label>
+    <label>Dólar BCV</label>
     <input type="text" id="dolar_bcv" class="large-input" readonly placeholder="Cargando...">
   </div>
+
   <div class="push-down"></div>
+
   <div class="card">
     <label>Precio USDT</label>
-    <input type="number" id="precio_usdt" placeholder="Ingresa precio">
+    <input type="number" id="precio_usdt" class="large-input" placeholder="Ingresa precio">
   </div>
 </div>
 
@@ -58,13 +61,11 @@ async function actualizarBCV() {
     try {
         const response = await fetch(url);
         const data = await response.text();
-        // Dividimos por filas y tomamos la segunda (índice 1)
-        const lineas = data.split('\n');
+        const lineas = data.split(/\r?\n/);
         if (lineas.length > 1) {
-            // Obtenemos la primera columna de la fila 2 y limpiamos caracteres extra
-            let valorRaw = lineas[1].split(',')[0].replace(/"/g, '').trim();
-            // Mostramos el valor tal cual viene del Sheet, sin procesarlo numéricamente para no perder precisión
-            dolarBcvInput.value = valorRaw;
+            // Tomamos la fila 2, columna 1
+            let valor = lineas[1].split(',')[0].replace(/"/g, '').trim();
+            dolarBcvInput.value = valor; // Se muestra tal cual viene del CSV
         }
     } catch (e) {
         dolarBcvInput.value = "Error";
@@ -80,11 +81,8 @@ function calcular() {
     if (copVal > 0 && precioUsdtVal > 0) {
         const usdVal = copVal / 4400;
         const vedVal = usdVal * precioUsdtVal;
-        vedInput.value = new Intl.NumberFormat('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(vedVal);
+        vedInput.value = vedVal.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         tasaInput.value = (vedVal / copVal).toFixed(4);
-    } else {
-        vedInput.value = "";
-        tasaInput.value = "";
     }
 }
 
