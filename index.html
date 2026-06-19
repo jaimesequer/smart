@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Conversor COP ↔ VES</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1220;
+    color: white;
+    display: flex;
+    justify-content: center;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 420px;
+    padding: 18px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .card {
+    background: #111b2e;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  label {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  input {
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+  }
+
+  input[readonly] {
+    background: #1c2a44;
+    color: #9ca3af;
+  }
+
+  .info {
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 10px;
+  }
+
+  .badge {
+    text-align: center;
+    font-size: 12px;
+    background: #1b2a4a;
+    padding: 8px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <h1>Casa de Cambio</h1>
+
+  <div class="badge">
+    COP ↔ VES automático (Binance P2P)
+  </div>
+
+  <div class="card">
+    <label>COP (editable)</label>
+    <input type="number" id="cop" placeholder="Ej: 100000">
+  </div>
+
+  <div class="card">
+    <label>VES (automático)</label>
+    <input type="number" id="ves" readonly>
+  </div>
+
+  <div class="card">
+    <label>Tasa VES / USDT (automática)</label>
+    <input type="number" id="tasa" readonly>
+  </div>
+
+  <div class="info">
+    Actualización automática cada 60 segundos
+  </div>
+
+</div>
+
+<script>
+const cop = document.getElementById("cop");
+const ves = document.getElementById("ves");
+const tasa = document.getElementById("tasa");
+
+function round(n){
+  return Math.round(n);
+}
+
+/* 🔥 Obtener tasa real desde Binance P2P */
+async function obtenerTasa(){
+  try {
+    const res = await fetch("https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        asset: "USDT",
+        fiat: "VES",
+        tradeType: "SELL",
+        page: 1,
+        rows: 1,
+        payTypes: [],
+        publisherType: null
+      })
+    });
+
+    const data = await res.json();
+
+    const precio = parseFloat(data.data[0].adv.price);
+
+    tasa.value = Math.round(precio);
+
+    calcular();
+
+  } catch (err) {
+    console.log("Error obteniendo tasa", err);
+  }
+}
+
+/* 🔢 cálculo principal */
+function calcular(){
+  const c = Number(cop.value);
+  const t = Number(tasa.value);
+
+  if(c > 0 && t > 0){
+    ves.value = round(c / t);
+  } else {
+    ves.value = "";
+  }
+}
+
+cop.addEventListener("input", calcular);
+
+/* 🚀 inicial */
+obtenerTasa();
+
+/* 🔁 refresco cada 60s */
+setInterval(obtenerTasa, 60000);
+</script>
+
+</body>
+</html>
