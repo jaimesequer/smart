@@ -1,273 +1,141 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia de Idiomas Smart - Accesible</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f9;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa de Cambio COP ↔ VES</title>
 
-        .main-container {
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
 
-        .logo-container {
-            margin-bottom: 25px;
-            text-align: center;
-        }
+    .container {
+      background: white;
+      width: 100%;
+      max-width: 420px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
 
-        .logo-img {
-            max-width: 200px;
-            height: auto;
-            display: block;
-        }
+    h1 {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
 
-        .app-card {
-            background-color: #87CEEB; /* Tu azul cielo */
-            padding: 30px;
-            border-radius: 12px;
-            width: 100%;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-        }
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-        .white-card {
-            background-color: #ffffff !important;
-            border: 3px solid #87CEEB;
-        }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
 
-        h1, h2 {
-            font-size: 24px;
-            color: #d32f2f; /* Rojo Smart */
-            text-align: center;
-            margin-bottom: 25px;
-            margin-top: 0;
-        }
+    input:focus {
+      border-color: #2d7ff9;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .note {
+      margin-top: 15px;
+      font-size: 12px;
+      text-align: center;
+      color: #666;
+    }
 
-        label {
-            display: block;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #111;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            border: 2px solid #333;
-            border-radius: 8px;
-            box-sizing: border-box;
-            background-color: white;
-        }
-
-        .btn-action {
-            width: 100%;
-            background-color: #d32f2f;
-            color: white;
-            padding: 18px;
-            font-size: 20px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .status-message {
-            margin-top: 15px;
-            padding: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 6px;
-            text-align: center;
-            display: none;
-        }
-
-        .clase-item {
-            background: #f8f9fa;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 12px;
-        }
-
-        .clase-hora {
-            font-weight: bold;
-            color: #d32f2f;
-            font-size: 20px !important;
-            margin: 0 0 5px 0;
-        }
-
-        .clase-item p {
-            margin: 5px 0;
-            font-size: 18px;
-        }
-    </style>
+    .badge {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #333;
+      background: #eef3ff;
+      padding: 8px;
+      border-radius: 8px;
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="main-container">
-        <div class="logo-container">
-            <h2>Academia Smart</h2>
-        </div>
+  <div class="container">
+    <h1>Casa de Cambio COP ↔ VES</h1>
 
-        <main class="app-card" id="pasoLogin">
-            <h1>Academia de Idiomas Smart</h1>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="usuario">Número de Identificación:</label>
-                    <input type="number" id="usuario" placeholder="Tu documento" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" placeholder="Tu contraseña" required>
-                </div>
-                <button type="submit" class="btn-action" id="submitBtn">Iniciar sesión</button>
-                <div id="status" class="status-message"></div>
-            </form>
-        </main>
-
-        <section class="app-card" id="pasoMenu" style="display: none;">
-            <h2>Área de Estudiante</h2>
-            <div class="form-group">
-                <label for="selectMenu">Selecciona una opción:</label>
-                <select id="selectMenu">
-                    <option value="programacion">📅 Programación</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="selectIdioma">¿Qué estás estudiando?:</label>
-                <select id="selectIdioma">
-                    <option value="ingles">🇺🇸 Inglés</option>
-                </select>
-            </div>
-            <button type="button" class="btn-action" onclick="irAPasoClase()">Continuar</button>
-        </section>
-
-        <section class="app-card" id="pasoAccionClase" style="display: none;">
-            <h2>Acción requerida</h2>
-            <p style="font-size: 18px; text-align: center; margin-bottom: 20px;">¿Qué acción deseas realizar hoy?</p>
-            <button type="button" class="btn-action" onclick="irAFiltroFinal()">🎯 Seleccionar la clase a tomar</button>
-        </section>
-
-        <section class="app-card" id="pasoFiltroFinal" style="display: none;">
-            <h2>Elegir Fecha y Sede</h2>
-            <div class="form-group">
-                <label for="selectSede">Sede:</label>
-                <select id="selectSede">
-                    <option value="LA CENTRAL MEDELLIN">📍 LA CENTRAL MEDELLÍN</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="inputFecha">Elegir Fecha:</label>
-                <input type="date" id="inputFecha" required>
-            </div>
-            <button type="button" class="btn-action" onclick="mostrarResultadosSimulados()">Buscar Horarios</button>
-        </section>
-
-        <section class="app-card white-card" id="pasoResultados" style="display: none;">
-            <h2>Horarios Disponibles</h2>
-            <div id="listaClases"></div>
-            <button type="button" class="btn-action" style="background-color: #666; margin-top: 20px;" onclick="reiniciarFlujo()">Volver al Inicio</button>
-        </section>
+    <div class="badge">
+      Calculadora sin decimales
     </div>
 
-    <script>
-        // Fijamos la fecha actual en el calendario
-        document.getElementById('inputFecha').value = new Date().toISOString().split('T')[0];
+    <label>COP (lo que paga el cliente)</label>
+    <input type="number" id="cop" placeholder="Ej: 100000">
 
-        // LÓGICA INTERACTIVA DEL LOGIN
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const statusDiv = document.getElementById('status');
+    <label>VES (lo que tú depositas)</label>
+    <input type="number" id="ves" placeholder="Ej: 1000000">
 
-            btn.innerText = "Conectando...";
-            btn.disabled = true;
-            statusDiv.style.display = "block";
-            statusDiv.style.backgroundColor = "#fff3cd";
-            statusDiv.style.color = "#856404";
-            statusDiv.innerText = "Validando credenciales...";
+    <label>Tasa</label>
+    <input type="number" id="tasa" placeholder="Ej: 40">
 
-            // Simulación inmediata y fluida para tu presentación
-            setTimeout(() => {
-                statusDiv.style.backgroundColor = "#d4edda";
-                statusDiv.style.color = "#155724";
-                statusDiv.innerText = "¡Ingreso exitoso!";
+    <div class="note">
+      Puedes escribir en COP o VES y se calcula automáticamente
+    </div>
+  </div>
 
-                setTimeout(() => {
-                    document.getElementById('pasoLogin').style.display = 'none';
-                    document.getElementById('pasoMenu').style.display = 'block';
-                }, 800);
-            }, 1200);
-        });
+<script>
+  const copInput = document.getElementById("cop");
+  const vesInput = document.getElementById("ves");
+  const tasaInput = document.getElementById("tasa");
 
-        // NAVEGACIÓN SEGUIDA DE LOS PASOS SOLICITADOS
-        function irAPasoClase() {
-            document.getElementById('pasoMenu').style.display = 'none';
-            document.getElementById('pasoAccionClase').style.display = 'block';
-        }
+  function round(n) {
+    return Math.round(n);
+  }
 
-        function irAFiltroFinal() {
-            document.getElementById('pasoAccionClase').style.display = 'none';
-            document.getElementById('pasoFiltroFinal').style.display = 'block';
-        }
+  let lock = false;
 
-        function mostrarResultadosSimulados() {
-            const fecha = document.getElementById('inputFecha').value;
-            const sede = document.getElementById('selectSede').value;
+  function copToVes() {
+    if (lock) return;
+    lock = true;
 
-            document.getElementById('pasoFiltroFinal').style.display = 'none';
-            document.getElementById('pasoResultados').style.display = 'block';
+    const cop = Number(copInput.value);
+    const tasa = Number(tasaInput.value);
 
-            const lista = document.getElementById('listaClases');
-            
-            // Renderizamos las tarjetas bonitas con los datos elegidos en el paso anterior
-            lista.innerHTML = `
-                <div class="clase-item">
-                    <p class="clase-hora">⏰ 18:00 a 19:30</p>
-                    <p>📚 Clase Nro. 17</p>
-                    <p>📅 Fecha: ${fecha}</p>
-                    <p>📍 Sede: ${sede}</p>
-                </div>
-                <div class="clase-item">
-                    <p class="clase-hora">⏰ 19:30 a 21:00</p>
-                    <p>📚 Clase Nro. 19</p>
-                    <p>📅 Fecha: ${fecha}</p>
-                    <p>📍 Sede: ${sede}</p>
-                </div>
-            `;
-        }
+    if (cop && tasa) {
+      vesInput.value = round(cop * tasa);
+    }
 
-        function reiniciarFlujo() {
-            document.getElementById('pasoResultados').style.display = 'none';
-            document.getElementById('pasoLogin').style.display = 'block';
-            document.getElementById('loginForm').reset();
-            document.getElementById('submitBtn').innerText = "Iniciar sesión";
-            document.getElementById('submitBtn').disabled = false;
-            document.getElementById('status').style.display = "none";
-        }
-    </script>
+    lock = false;
+  }
+
+  function vesToCop() {
+    if (lock) return;
+    lock = true;
+
+    const ves = Number(vesInput.value);
+    const tasa = Number(tasaInput.value);
+
+    if (ves && tasa) {
+      copInput.value = round(ves / tasa);
+    }
+
+    lock = false;
+  }
+
+  copInput.addEventListener("input", copToVes);
+  vesInput.addEventListener("input", vesToCop);
+  tasaInput.addEventListener("input", copToVes);
+</script>
+
 </body>
 </html>
