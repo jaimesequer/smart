@@ -60,7 +60,7 @@ function calcular() {
     const precioUsdtVal = parseFloat(precioUsdtInput.value) || 0;
     
     if (copVal > 0 && precioUsdtVal > 0) {
-        const usdVal = copVal / 4400;
+        const usdVal = copVal / 4200;
         const vedVal = usdVal * precioUsdtVal;
         
         vedInput.value = vedVal.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
