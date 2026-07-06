@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad — Smart Academy</title>
+<meta name="description" content="Política de privacidad de la app Smart Academy, desarrollada por Jaimesequer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ffffff;
+    --paper-alt: #F1F3F7;
+    --ink: #161E2E;
+    --ink-soft: #545F73;
+    --ink-faint: #8790A0;
+    --accent: #1C3F73;
+    --accent-2: #A9812E;
+    --line: #E1E5EC;
+    --radius: 14px;
+    --maxw: 760px;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration-color: rgba(28,63,115,0.35); text-underline-offset: 2px; }
+  a:hover { text-decoration-color: var(--accent); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--accent); color: #fff; padding: 10px 16px; z-index: 100;
+  }
+  .skip-link:focus { left: 12px; top: 12px; }
+
+  /* ---------- Header ---------- */
+  header.hero {
+    background: linear-gradient(180deg, #F7F8FA 0%, #ffffff 100%);
+    border-bottom: 1px solid var(--line);
+    padding: 56px 24px 40px;
+  }
+
+  .hero-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  /* Signature element: sello académico, hecho enteramente en CSS */
+  .seal {
+    flex: none;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    position: relative;
+    background:
+      radial-gradient(circle at 50% 50%, #ffffff 0 34%, transparent 35%),
+      conic-gradient(from 0deg, var(--accent-2), var(--accent) 35%, var(--accent-2) 70%, var(--accent) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(28,63,115,0.18);
+    animation: seal-in 700ms ease-out both;
+  }
+  .seal::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(28,63,115,0.35);
+  }
+  .seal span {
+    position: relative;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  @keyframes seal-in {
+    from { opacity: 0; transform: scale(0.85) rotate(-8deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin: 0 0 8px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.15;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+
+  .meta-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Layout ---------- */
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+  }
+
+  .lede {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+  }
+
+  nav.toc {
+    background: var(--paper-alt);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 44px;
+  }
+  nav.toc p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 12px;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    columns: 2;
+    column-gap: 24px;
+  }
+  nav.toc li { break-inside: avoid; margin-bottom: 8px; }
+  nav.toc a { color: var(--ink); font-size: 14.5px; }
+  nav.toc a:hover { color: var(--accent); }
+
+  section.clause {
+    padding-top: 34px;
+    margin-top: 34px;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 20px;
+  }
+  section.clause:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+  .clause-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .clause-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent-2);
+    font-weight: 600;
+    flex: none;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 21px;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  section.clause p, section.clause li {
+    color: var(--ink-soft);
+    font-size: 15.5px;
+  }
+  section.clause ul { padding-left: 20px; margin: 10px 0; }
+  section.clause li { margin-bottom: 6px; }
+  section.clause strong { color: var(--ink); font-weight: 600; }
+
+  .callout {
+    background: var(--paper-alt);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 16px 0;
+  }
+
+  table.data-map {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 6px;
+    font-size: 14px;
+  }
+  table.data-map th, table.data-map td {
+    text-align: left;
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.data-map th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+
+  .contact-card {
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 26px 26px;
+    margin-top: 8px;
+  }
+  .contact-card h2 { color: #fff; }
+  .contact-card a { color: #fff; }
+  .contact-card p { color: rgba(255,255,255,0.85); }
+  .contact-card .clause-num { color: #F0D9A0; }
+
+  footer {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    color: var(--ink-faint);
+    font-size: 12.5px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 560px) {
+    .hero-inner { gap: 18px; }
+    .seal { width: 68px; height: 68px; }
+    .seal span { font-size: 17px; }
+    nav.toc ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Ir al contenido</a>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="seal" aria-hidden="true"><span>SA</span></div>
+    <div>
+      <p class="eyebrow">Documento legal · App móvil</p>
+      <h1>Política de Privacidad<br>Smart Academy</h1>
+      <p class="meta-line">Última actualización: 6 de julio de 2026 · Jaimesequer</p>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+  <p class="lede">
+    Esta política explica qué información utiliza la app <strong>Smart Academy</strong>,
+    cómo la utiliza y dónde queda guardada. Está escrita para que puedas leerla sin ser
+    abogado o abogada: si algo no queda claro, escribinos a
+    <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
+  </p>
+
+  <nav class="toc" aria-label="Tabla de contenidos">
+    <p>En esta página</p>
+    <ol>
+      <li><a href="#quienes-somos">1. Quiénes somos</a></li>
+      <li><a href="#que-es-la-app">2. Qué es esta app</a></li>
+      <li><a href="#datos-que-usa">3. Qué información utiliza</a></li>
+      <li><a href="#como-se-usa">4. Cómo se usa esa información</a></li>
+      <li><a href="#donde-se-guarda">5. Dónde se guarda</a></li>
+      <li><a href="#con-quien-se-comparte">6. Con quién se comparte</a></li>
+      <li><a href="#permisos">7. Permisos del dispositivo</a></li>
+      <li><a href="#seguridad">8. Seguridad</a></li>
+      <li><a href="#retencion">9. Retención y eliminación</a></li>
+      <li><a href="#derechos">10. Tus derechos (Habeas Data)</a></li>
+      <li><a href="#menores">11. Menores de edad</a></li>
+      <li><a href="#cambios">12. Cambios a esta política</a></li>
+      <li><a href="#contacto">13. Contacto</a></li>
+    </ol>
+  </nav>
+
+  <section class="clause" id="quienes-somos">
+    <div class="clause-head">
+      <span class="clause-num">01</span>
+      <h2>Quiénes somos</h2>
+    </div>
+    <p>
+      Smart Academy es una app desarrollada de forma independiente por
+      <strong>Jaimesequer</strong> (Colombia), publicada en Galaxy Store.
+      Para cualquier consulta sobre privacidad o sobre el funcionamiento de la app,
+      podés escribir a <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
+    </p>
+  </section>
+
+  <section class="clause" id="que-es-la-app">
+    <div class="clause-head">
+      <span class="clause-num">02</span>
+      <h2>Qué es esta app</h2>
+    </div>
+    <p>
+      Smart Academy es un cliente móvil que se conecta directamente al portal web
+      oficial de tu institución educativa (el mismo sitio al que entrarías desde un
+      navegador). La app no tiene un servidor propio ni una base de datos central:
+      actúa como un puente para que puedas iniciar sesión, consultar tu información y
+      programar clases desde el celular, de forma más cómoda que desde el navegador.
+    </p>
+    <div class="callout">
+      Esto significa que tu usuario, tu clave y toda tu información académica viajan
+      directamente entre tu dispositivo y el sitio de la institución. Nosotros no
+      operamos un servidor intermedio que reciba o procese esos datos.
+    </div>
+  </section>
+
+  <section class="clause" id="datos-que-usa">
+    <div class="clause-head">
+      <span class="clause-num">03</span>
+      <h2>Qué información utiliza la app</h2>
+    </div>
+    <p>La app lee y muestra la misma información que ya existe en el portal de la institución:</p>
+    <table class="data-map">
+      <thead>
+        <tr><th>Categoría</th><th>Ejemplos</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Acceso</td><td>Usuario y contraseña del portal de la institución</td></tr>
+        <tr><td>Identificación</td><td>Nombre, tipo y número de documento</td></tr>
+        <tr><td>Contacto</td><td>Dirección, celular, teléfono, correo electrónico</td></tr>
+        <tr><td>Datos personales adicionales</td><td>Estado civil, fecha de nacimiento, estrato, grupo sanguíneo y RH</td></tr>
+        <tr><td>Académico / contrato</td><td>Plan de estudios, horas contratadas y disponibles, fecha de vencimiento</td></tr>
+        <tr><td>Financiero</td><td>Pagos pendientes y pagos realizados (fechas, valores, recibos)</td></tr>
+        <tr><td>Programación de clases</td><td>Sede, día, horario y estado de tus clases (pendientes, programadas, tomadas)</td></tr>
+        <tr><td>Técnicos</td><td>Cookies de sesión del portal, necesarias para mantenerte con la sesión iniciada</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Todos estos datos ya existen en el portal de la institución antes de que la app
+      los muestre: la app no le pide información nueva a la institución ni crea datos
+      que no existieran previamente.
+    </p>
+  </section>
+
+  <section class="clause" id="como-se-usa">
+    <div class="clause-head">
+      <span class="clause-num">04</span>
+      <h2>Cómo se usa esa información</h2>
+    </div>
+    <ul>
+      <li>Para iniciar y mantener tu sesión dentro del portal de la institución.</li>
+      <li>Para mostrarte tus datos personales, tu información financiera, el estado
+        de tu contrato y tu programación de clases dentro de una interfaz de app,
+        en vez de un navegador.</li>
+      <li>Para permitirte programar o cancelar clases, y cambiar tu contraseña,
+        replicando las mismas acciones que harías en el sitio web.</li>
+      <li>Para acelerar la app la próxima vez que la abras: en vez de recargar todo
+        desde cero, se muestra primero lo último que se leyó, y se actualiza cuando
+        tocás "recargar".</li>
+    </ul>
+    <p>
+      <strong>La app no utiliza tu información con fines publicitarios, no la analiza
+      con fines estadísticos propios, ni la usa para ningún propósito distinto al de
+      mostrarte tu propia información académica.</strong>
+    </p>
+  </section>
+
+  <section class="clause" id="donde-se-guarda">
+    <div class="clause-head">
+      <span class="clause-num">05</span>
+      <h2>Dónde se guarda la información</h2>
+    </div>
+    <p>
+      Toda la información se guarda <strong>únicamente en tu dispositivo</strong>,
+      usando el almacenamiento seguro y cifrado del sistema operativo
+      (Android Keystore). Concretamente:
+    </p>
+    <ul>
+      <li>Las cookies de sesión del portal, mientras dura tu sesión.</li>
+      <li>Si elegís esa opción, los datos de acceso de hasta 3 cuentas guardadas,
+        para no tener que volver a escribirlos cada vez.</li>
+      <li>Una copia de la última información leída (datos personales, financiero,
+        contrato, programación) para que la app abra más rápido y funcione aunque
+        el sitio tarde en responder.</li>
+    </ul>
+    <p>
+      Nada de esto se envía a servidores de Jaimesequer ni de ningún tercero: se queda
+      guardado localmente en tu celular.
+    </p>
+  </section>
+
+  <section class="clause" id="con-quien-se-comparte">
+    <div class="clause-head">
+      <span class="clause-num">06</span>
+      <h2>Con quién se comparte tu información</h2>
+    </div>
+    <p>Tu información se comparte únicamente con:</p>
+    <ul>
+      <li><strong>El portal oficial de tu institución educativa</strong>, porque es
+        de ahí de donde proviene y hacia donde se envían tus acciones (por ejemplo,
+        programar una clase o cambiar tu contraseña).</li>
+    </ul>
+    <p>
+      La app <strong>no integra</strong> herramientas de analítica de terceros, redes
+      publicitarias, ni kits de desarrollo (SDK) de seguimiento. No vendemos ni
+      alquilamos información a nadie, porque no operamos ninguna base de datos propia
+      con tu información para hacerlo.
+    </p>
+  </section>
+
+  <section class="clause" id="permisos">
+    <div class="clause-head">
+      <span class="clause-num">07</span>
+      <h2>Permisos del dispositivo</h2>
+    </div>
+    <p>La app solicita únicamente el permiso de <strong>acceso a Internet</strong>, necesario para cargar el portal de la institución dentro de la app. No solicita ni utiliza:</p>
+    <ul>
+      <li>Cámara ni galería de fotos</li>
+      <li>Ubicación (GPS)</li>
+      <li>Contactos</li>
+      <li>Micrófono</li>
+      <li>Almacenamiento externo del dispositivo</li>
+    </ul>
+  </section>
+
+  <section class="clause" id="seguridad">
+    <div class="clause-head">
+      <span class="clause-num">08</span>
+      <h2>Seguridad</h2>
+    </div>
+    <p>
+      La información que la app guarda en tu dispositivo se almacena mediante
+      mecanismos de cifrado nativos del sistema operativo. Aun así, ningún sistema es
+      100% infalible: te recomendamos mantener tu celular protegido con PIN, huella o
+      reconocimiento facial, y evitar instalar la app fuera de Galaxy Store u otras
+      tiendas oficiales.
+    </p>
+  </section>
+
+  <section class="clause" id="retencion">
+    <div class="clause-head">
+      <span class="clause-num">09</span>
+      <h2>Retención y eliminación de datos</h2>
+    </div>
+    <p>
+      La información guardada en tu dispositivo permanece ahí incluso si cerrás
+      sesión, para que la próxima vez que entres con el mismo usuario no tengas que
+      esperar a que se recargue todo de nuevo. Podés eliminar toda esa información en
+      cualquier momento:
+    </p>
+    <ul>
+      <li>Desinstalando la app, lo que borra por completo todo lo guardado en el
+        dispositivo, o</li>
+      <li>Borrando los datos/caché de la app desde Ajustes de Android &gt;
+        Aplicaciones &gt; Smart Academy &gt; Almacenamiento.</li>
+    </ul>
+  </section>
+
+  <section class="clause" id="derechos">
+    <div class="clause-head">
+      <span class="clause-num">10</span>
+      <h2>Tus derechos (Habeas Data — Colombia)</h2>
+    </div>
+    <p>
+      De acuerdo con la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia, tenés
+      derecho a conocer, actualizar, rectificar y solicitar la supresión de tu
+      información personal. Como la app no administra una base de datos propia (toda
+      tu información pertenece y es administrada por la institución educativa), estos
+      derechos se ejercen directamente ante la institución, que es quien actúa como
+      responsable del tratamiento de tus datos.
+    </p>
+    <p>
+      Si tenés dudas puntuales sobre lo que la app en sí misma guarda en tu
+      dispositivo (ver sección 5), podés escribirnos a
+      <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
+    </p>
+  </section>
+
+  <section class="clause" id="menores">
+    <div class="clause-head">
+      <span class="clause-num">11</span>
+      <h2>Menores de edad</h2>
+    </div>
+    <p>
+      La app está pensada para estudiantes con una cuenta activa en el portal de la
+      institución educativa. El tratamiento de datos de estudiantes menores de edad
+      se rige por las políticas propias de la institución y por la normativa
+      colombiana aplicable a menores. La app en sí misma no recopila información
+      adicional a la que ya existe en el portal.
+    </p>
+  </section>
+
+  <section class="clause" id="cambios">
+    <div class="clause-head">
+      <span class="clause-num">12</span>
+      <h2>Cambios a esta política</h2>
+    </div>
+    <p>
+      Si esta política cambia, se actualizará la fecha que aparece al inicio de la
+      página. Te recomendamos revisarla de vez en cuando, especialmente después de
+      actualizar la app.
+    </p>
+  </section>
+
+  <section class="clause" id="contacto">
+    <div class="clause-head">
+      <span class="clause-num">13</span>
+      <h2 style="color: var(--ink);">Contacto</h2>
+    </div>
+    <div class="contact-card">
+      <p class="clause-num" style="margin-bottom:6px;">¿Preguntas sobre esta política?</p>
+      <h2>Escribinos</h2>
+      <p>
+        Desarrollador: Jaimesequer<br>
+        Correo: <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a><br>
+        País: Colombia
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2026 Jaimesequer — Smart Academy. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
