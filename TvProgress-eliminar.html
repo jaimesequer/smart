@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliminar cuenta — TV Progress</title>
+<style>
+  :root {
+    --azul: #1565d8;
+    --texto: #1b1f24;
+    --texto-suave: #4a5560;
+    --borde: #e3e7ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f5f7fa;
+    color: var(--texto);
+    line-height: 1.65;
+  }
+  .contenedor {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header .app-nombre {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: var(--azul);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .card {
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    padding: 32px;
+    margin-top: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  h2 { font-size: 18px; margin: 0 0 12px; }
+  ol { padding-left: 22px; }
+  li { margin-bottom: 10px; }
+  .nota {
+    background: #eef5ff;
+    border-left: 4px solid var(--azul);
+    padding: 14px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #1a3a63;
+    margin: 20px 0 0;
+  }
+  .datos-box {
+    background: #fff5f5;
+    border-left: 4px solid #e53935;
+    padding: 16px;
+    border-radius: 6px;
+    margin-top: 20px;
+  }
+  .datos-box h3 { margin: 0 0 8px; font-size: 15px; color: #b71c1c; }
+  .datos-box ul { margin: 0; padding-left: 20px; }
+  .contacto-box {
+    background: #f5f8fc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 24px;
+  }
+  a { color: var(--azul); }
+  footer { text-align: center; color: #9aa4af; font-size: 13px; margin-top: 32px; }
+</style>
+</head>
+<body>
+  <div class="contenedor">
+    <header>
+      <div class="app-nombre">📺 TV Progress</div>
+      <h1>Cómo eliminar tu cuenta</h1>
+    </header>
+
+    <div class="card">
+      <h2>Eliminación desde la app</h2>
+      <p>Puedes eliminar tu cuenta de TV Progress y todos los datos asociados directamente desde la aplicación, sin necesidad de contactar a soporte. Sigue estos pasos:</p>
+      <ol>
+        <li>Abre la app <strong>TV Progress</strong> e inicia sesión con tu cuenta.</li>
+        <li>Ve a la pestaña <strong>Perfil</strong>.</li>
+        <li>Toca la opción <strong>"Cuenta"</strong>.</li>
+        <li>Toca el botón <strong>"Eliminar cuenta"</strong>.</li>
+        <li>Confirma escribiendo tu correo electrónico y tu contraseña actual.</li>
+        <li>Toca <strong>"Confirmar eliminación"</strong>.</li>
+      </ol>
+
+      <div class="nota">
+        La eliminación es <strong>inmediata y permanente</strong>. Una vez confirmada, no es posible
+        recuperar la cuenta ni los datos asociados.
+      </div>
+
+      <div class="datos-box">
+        <h3>Datos que se eliminan</h3>
+        <ul>
+          <li>Datos de perfil (nombre, apellido, email, fecha de nacimiento, país)</li>
+          <li>Foto de perfil</li>
+          <li>Lista de películas y series, progreso de visualización e historial</li>
+          <li>Calificaciones y comentarios enviados</li>
+          <li>Tu cuenta de acceso (correo y contraseña) en Firebase Authentication</li>
+        </ul>
+      </div>
+
+      <div class="contacto-box">
+        <p>¿No puedes acceder a tu cuenta para eliminarla desde la app? Escríbenos y con gusto te ayudamos a completar el proceso.</p>
+        <p><strong>Correo de contacto:</strong> <a href="mailto:jaimesequer@zohomail.com<">Jaimesequer@zohomail.com</a></p>
+      </div>
+    </div>
+
+    <footer>© 2026 TV Progress. Todos los derechos reservados.</footer>
+  </div>
+</body>
+</html>
