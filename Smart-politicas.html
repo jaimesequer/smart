@@ -21,15 +21,11 @@
     --radius: 14px;
     --maxw: 760px;
   }
-
   * { box-sizing: border-box; }
-
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
   }
-
   html { scroll-behavior: smooth; }
-
   body {
     margin: 0;
     background: var(--paper);
@@ -38,7 +34,6 @@
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-
   a { color: var(--accent); text-decoration-color: rgba(28,63,115,0.35); text-underline-offset: 2px; }
   a:hover { text-decoration-color: var(--accent); }
   a:focus-visible, button:focus-visible {
@@ -46,20 +41,17 @@
     outline-offset: 3px;
     border-radius: 4px;
   }
-
   .skip-link {
     position: absolute; left: -9999px; top: 0;
     background: var(--accent); color: #fff; padding: 10px 16px; z-index: 100;
   }
   .skip-link:focus { left: 12px; top: 12px; }
-
   /* ---------- Header ---------- */
   header.hero {
     background: linear-gradient(180deg, #F7F8FA 0%, #ffffff 100%);
     border-bottom: 1px solid var(--line);
     padding: 56px 24px 40px;
   }
-
   .hero-inner {
     max-width: var(--maxw);
     margin: 0 auto;
@@ -67,7 +59,6 @@
     align-items: center;
     gap: 28px;
   }
-
   /* Signature element: sello académico, hecho enteramente en CSS */
   .seal {
     flex: none;
@@ -103,7 +94,6 @@
     from { opacity: 0; transform: scale(0.85) rotate(-8deg); }
     to   { opacity: 1; transform: scale(1) rotate(0deg); }
   }
-
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12.5px;
@@ -112,7 +102,6 @@
     color: var(--accent-2);
     margin: 0 0 8px;
   }
-
   h1 {
     font-family: 'Fraunces', serif;
     font-weight: 600;
@@ -121,26 +110,22 @@
     margin: 0 0 10px;
     color: var(--ink);
   }
-
   .meta-line {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12.5px;
     color: var(--ink-faint);
   }
-
   /* ---------- Layout ---------- */
   main {
     max-width: var(--maxw);
     margin: 0 auto;
     padding: 40px 24px 100px;
   }
-
   .lede {
     font-size: 17px;
     color: var(--ink-soft);
     margin-bottom: 36px;
   }
-
   nav.toc {
     background: var(--paper-alt);
     border: 1px solid var(--line);
@@ -166,7 +151,6 @@
   nav.toc li { break-inside: avoid; margin-bottom: 8px; }
   nav.toc a { color: var(--ink); font-size: 14.5px; }
   nav.toc a:hover { color: var(--accent); }
-
   section.clause {
     padding-top: 34px;
     margin-top: 34px;
@@ -174,7 +158,6 @@
     scroll-margin-top: 20px;
   }
   section.clause:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
-
   .clause-head {
     display: flex;
     align-items: baseline;
@@ -195,7 +178,6 @@
     margin: 0;
     color: var(--ink);
   }
-
   section.clause p, section.clause li {
     color: var(--ink-soft);
     font-size: 15.5px;
@@ -203,7 +185,6 @@
   section.clause ul { padding-left: 20px; margin: 10px 0; }
   section.clause li { margin-bottom: 6px; }
   section.clause strong { color: var(--ink); font-weight: 600; }
-
   .callout {
     background: var(--paper-alt);
     border-left: 3px solid var(--accent);
@@ -213,7 +194,6 @@
     color: var(--ink-soft);
     margin: 16px 0;
   }
-
   table.data-map {
     width: 100%;
     border-collapse: collapse;
@@ -234,7 +214,6 @@
     color: var(--ink-faint);
     font-weight: 500;
   }
-
   .contact-card {
     background: var(--accent);
     color: #fff;
@@ -246,7 +225,6 @@
   .contact-card a { color: #fff; }
   .contact-card p { color: rgba(255,255,255,0.85); }
   .contact-card .clause-num { color: #F0D9A0; }
-
   footer {
     max-width: var(--maxw);
     margin: 0 auto;
@@ -255,7 +233,6 @@
     font-size: 12.5px;
     font-family: 'JetBrains Mono', monospace;
   }
-
   @media (max-width: 560px) {
     .hero-inner { gap: 18px; }
     .seal { width: 68px; height: 68px; }
@@ -265,20 +242,17 @@
 </style>
 </head>
 <body>
-
 <a class="skip-link" href="#contenido">Ir al contenido</a>
-
 <header class="hero">
   <div class="hero-inner">
     <div class="seal" aria-hidden="true"><span>SA</span></div>
     <div>
       <p class="eyebrow">Documento legal · App móvil</p>
       <h1>Política de Privacidad<br>Smart Academy</h1>
-      <p class="meta-line">Última actualización: 6 de julio de 2026 · Jaimesequer</p>
+      <p class="meta-line">Última actualización: 27 de julio de 2026 · Jaimesequer</p>
     </div>
   </div>
 </header>
-
 <main id="contenido">
   <p class="lede">
     Esta política explica qué información utiliza la app <strong>Smart Academy</strong>,
@@ -286,7 +260,6 @@
     abogado o abogada: si algo no queda claro, escribinos a
     <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
   </p>
-
   <nav class="toc" aria-label="Tabla de contenidos">
     <p>En esta página</p>
     <ol>
@@ -305,7 +278,6 @@
       <li><a href="#contacto">13. Contacto</a></li>
     </ol>
   </nav>
-
   <section class="clause" id="quienes-somos">
     <div class="clause-head">
       <span class="clause-num">01</span>
@@ -318,7 +290,6 @@
       podés escribir a <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
     </p>
   </section>
-
   <section class="clause" id="que-es-la-app">
     <div class="clause-head">
       <span class="clause-num">02</span>
@@ -327,23 +298,28 @@
     <p>
       Smart Academy es un cliente móvil que se conecta directamente al portal web
       oficial de tu institución educativa (el mismo sitio al que entrarías desde un
-      navegador). La app no tiene un servidor propio ni una base de datos central:
-      actúa como un puente para que puedas iniciar sesión, consultar tu información y
-      programar clases desde el celular, de forma más cómoda que desde el navegador.
+      navegador). La app no tiene un servidor propio ni una base de datos central para
+      tu información académica: actúa como un puente para que puedas iniciar sesión,
+      consultar tu información y programar clases desde el celular, de forma más
+      cómoda que desde el navegador.
+    </p>
+    <p>
+      Además, la app incluye una función de <strong>Sugerencias</strong> que sí utiliza
+      un servicio externo (Google Forms / Google Sheets) para recibir y hacerte
+      seguimiento a las sugerencias que envíes — ver el detalle en las secciones 3 y 6.
     </p>
     <div class="callout">
       Esto significa que tu usuario, tu clave y toda tu información académica viajan
       directamente entre tu dispositivo y el sitio de la institución. Nosotros no
-      operamos un servidor intermedio que reciba o procese esos datos.
+      operamos un servidor intermedio que reciba o procese esos datos académicos.
     </div>
   </section>
-
   <section class="clause" id="datos-que-usa">
     <div class="clause-head">
       <span class="clause-num">03</span>
       <h2>Qué información utiliza la app</h2>
     </div>
-    <p>La app lee y muestra la misma información que ya existe en el portal de la institución:</p>
+    <p>La app lee y muestra la misma información que ya existe en el portal de la institución, y además maneja los datos que vos mismo escribís al enviar una sugerencia:</p>
     <table class="data-map">
       <thead>
         <tr><th>Categoría</th><th>Ejemplos</th></tr>
@@ -356,16 +332,19 @@
         <tr><td>Académico / contrato</td><td>Plan de estudios, horas contratadas y disponibles, fecha de vencimiento</td></tr>
         <tr><td>Financiero</td><td>Pagos pendientes y pagos realizados (fechas, valores, recibos)</td></tr>
         <tr><td>Programación de clases</td><td>Sede, día, horario y estado de tus clases (pendientes, programadas, tomadas)</td></tr>
+        <tr><td>Sugerencias enviadas</td><td>Nombre, celular, email y el texto de cada sugerencia que envíes, junto con su estado (pendiente, finalizada, descartada) y la respuesta que te den</td></tr>
         <tr><td>Técnicos</td><td>Cookies de sesión del portal, necesarias para mantenerte con la sesión iniciada</td></tr>
       </tbody>
     </table>
     <p>
-      Todos estos datos ya existen en el portal de la institución antes de que la app
-      los muestre: la app no le pide información nueva a la institución ni crea datos
-      que no existieran previamente.
+      Los datos de acceso, identificación, contacto, académicos y financieros ya
+      existen en el portal de la institución antes de que la app los muestre: la app
+      no le pide información nueva a la institución ni crea datos que no existieran
+      previamente. Las <strong>sugerencias</strong> son la única excepción: ese texto lo
+      escribís vos dentro de la app y se envía a un servicio externo (ver sección 6),
+      no al portal de la institución.
     </p>
   </section>
-
   <section class="clause" id="como-se-usa">
     <div class="clause-head">
       <span class="clause-num">04</span>
@@ -378,6 +357,12 @@
         en vez de un navegador.</li>
       <li>Para permitirte programar o cancelar clases, y cambiar tu contraseña,
         replicando las mismas acciones que harías en el sitio web.</li>
+      <li>Para enviar y hacerte seguimiento a las sugerencias que quieras compartir
+        con la institución, incluyendo avisarte (mediante una notificación en tu
+        celular) cuando una sugerencia tuya cambia de estado.</li>
+      <li>Para recordarte, mediante una notificación local en tu celular, que tenés
+        una clase programada próximamente, con tiempo suficiente para cancelarla si
+        no la vas a tomar.</li>
       <li>Para acelerar la app la próxima vez que la abras: en vez de recargar todo
         desde cero, se muestra primero lo último que se leyó, y se actualiza cuando
         tocás "recargar".</li>
@@ -385,19 +370,18 @@
     <p>
       <strong>La app no utiliza tu información con fines publicitarios, no la analiza
       con fines estadísticos propios, ni la usa para ningún propósito distinto al de
-      mostrarte tu propia información académica.</strong>
+      mostrarte tu propia información académica y darte seguimiento a tus
+      sugerencias.</strong>
     </p>
   </section>
-
   <section class="clause" id="donde-se-guarda">
     <div class="clause-head">
       <span class="clause-num">05</span>
       <h2>Dónde se guarda la información</h2>
     </div>
     <p>
-      Toda la información se guarda <strong>únicamente en tu dispositivo</strong>,
-      usando el almacenamiento seguro y cifrado del sistema operativo
-      (Android Keystore). Concretamente:
+      Toda la información que la app guarda en tu dispositivo usa el almacenamiento
+      seguro y cifrado del sistema operativo (Android Keystore). Concretamente:
     </p>
     <ul>
       <li>Las cookies de sesión del portal, mientras dura tu sesión.</li>
@@ -406,38 +390,64 @@
       <li>Una copia de la última información leída (datos personales, financiero,
         contrato, programación) para que la app abra más rápido y funcione aunque
         el sitio tarde en responder.</li>
+      <li>El historial de las sugerencias que enviaste desde este dispositivo, su
+        estado y si ya viste o no el último cambio de estado.</li>
+      <li>Un índice interno de los recordatorios de clase que quedaron programados en
+        tu celular, para poder cancelarlos si cancelás la clase correspondiente.</li>
     </ul>
     <p>
-      Nada de esto se envía a servidores de Jaimesequer ni de ningún tercero: se queda
-      guardado localmente en tu celular.
+      Nada de lo anterior se envía a servidores propios de Jaimesequer: se queda
+      guardado localmente en tu celular. La única información que sale de tu
+      dispositivo hacia un tercero distinto del portal de la institución es el texto
+      de las sugerencias que decidas enviar (ver sección 6).
     </p>
   </section>
-
   <section class="clause" id="con-quien-se-comparte">
     <div class="clause-head">
       <span class="clause-num">06</span>
       <h2>Con quién se comparte tu información</h2>
     </div>
-    <p>Tu información se comparte únicamente con:</p>
+    <p>Tu información se comparte con:</p>
     <ul>
       <li><strong>El portal oficial de tu institución educativa</strong>, porque es
         de ahí de donde proviene y hacia donde se envían tus acciones (por ejemplo,
         programar una clase o cambiar tu contraseña).</li>
+      <li><strong>Google Forms y Google Sheets (Google LLC)</strong>, únicamente
+        cuando enviás una sugerencia desde la app. En ese caso, tu nombre, celular,
+        email y el texto de la sugerencia se envían directamente desde tu
+        dispositivo a un formulario de Google, y la app consulta periódicamente la
+        hoja de respuestas asociada para mostrarte el estado y la respuesta de tu
+        sugerencia. Este envío es directo entre tu celular y Google: no pasa por
+        ningún servidor de Jaimesequer. El tratamiento que Google le da a esa
+        información se rige por la
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidad de Google</a>.</li>
     </ul>
     <p>
-      La app <strong>no integra</strong> herramientas de analítica de terceros, redes
-      publicitarias, ni kits de desarrollo (SDK) de seguimiento. No vendemos ni
-      alquilamos información a nadie, porque no operamos ninguna base de datos propia
-      con tu información para hacerlo.
+      La app <strong>no integra</strong> herramientas de analítica de terceros ni
+      redes publicitarias. No vendemos ni alquilamos información a nadie, porque no
+      operamos ninguna base de datos propia con tu información para hacerlo.
     </p>
   </section>
-
   <section class="clause" id="permisos">
     <div class="clause-head">
       <span class="clause-num">07</span>
       <h2>Permisos del dispositivo</h2>
     </div>
-    <p>La app solicita únicamente el permiso de <strong>acceso a Internet</strong>, necesario para cargar el portal de la institución dentro de la app. No solicita ni utiliza:</p>
+    <p>La app solicita los siguientes permisos:</p>
+    <ul>
+      <li><strong>Acceso a Internet</strong>, necesario para cargar el portal de la
+        institución dentro de la app y para enviar/consultar sugerencias.</li>
+      <li><strong>Notificaciones</strong>, para poder avisarte cuando tenés una
+        clase programada próximamente y cuando una sugerencia tuya cambia de
+        estado. Podés desactivarlo desde Ajustes de Android sin que el resto de la
+        app deje de funcionar; simplemente no recibirás esos avisos.</li>
+      <li><strong>Alarmas y recordatorios</strong> (alarmas exactas), para que el
+        recordatorio de una clase programada suene lo más cerca posible de la hora
+        calculada, en vez de demorarse por el ahorro de batería del sistema. Es
+        opcional: sin este permiso, la app sigue funcionando igual, pero el aviso de
+        clase puede llegar con retraso o no llegar.</li>
+    </ul>
+    <p>La app no solicita ni utiliza:</p>
     <ul>
       <li>Cámara ni galería de fotos</li>
       <li>Ubicación (GPS)</li>
@@ -445,8 +455,14 @@
       <li>Micrófono</li>
       <li>Almacenamiento externo del dispositivo</li>
     </ul>
+    <p>
+      Por separado, el menú "Contáctanos" de la app puede abrir tu cliente de
+      correo, tu marcador telefónico o WhatsApp para que escribas al desarrollador o
+      a la institución. Esto abre esas apps externas de tu celular; la app no lee ni
+      accede a tu correo, tus contactos o tus conversaciones de WhatsApp en ningún
+      momento.
+    </p>
   </section>
-
   <section class="clause" id="seguridad">
     <div class="clause-head">
       <span class="clause-num">08</span>
@@ -460,7 +476,6 @@
       tiendas oficiales.
     </p>
   </section>
-
   <section class="clause" id="retencion">
     <div class="clause-head">
       <span class="clause-num">09</span>
@@ -474,12 +489,17 @@
     </p>
     <ul>
       <li>Desinstalando la app, lo que borra por completo todo lo guardado en el
-        dispositivo, o</li>
+        dispositivo (incluyendo el historial local de sugerencias y los recordatorios
+        de clase programados), o</li>
       <li>Borrando los datos/caché de la app desde Ajustes de Android &gt;
         Aplicaciones &gt; Smart Academy &gt; Almacenamiento.</li>
     </ul>
+    <p>
+      La eliminación de una sugerencia ya enviada desde la hoja de respuestas de
+      Google no está bajo control de la app: si querés que se elimine ese registro
+      puntual, escribinos (sección 13) y lo gestionamos manualmente.
+    </p>
   </section>
-
   <section class="clause" id="derechos">
     <div class="clause-head">
       <span class="clause-num">10</span>
@@ -488,18 +508,17 @@
     <p>
       De acuerdo con la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia, tenés
       derecho a conocer, actualizar, rectificar y solicitar la supresión de tu
-      información personal. Como la app no administra una base de datos propia (toda
-      tu información pertenece y es administrada por la institución educativa), estos
-      derechos se ejercen directamente ante la institución, que es quien actúa como
-      responsable del tratamiento de tus datos.
+      información personal. La mayor parte de tu información (académica, financiera,
+      de contrato) pertenece y es administrada por la institución educativa, así que
+      esos derechos se ejercen directamente ante la institución, que es quien actúa
+      como responsable del tratamiento de esos datos.
     </p>
     <p>
-      Si tenés dudas puntuales sobre lo que la app en sí misma guarda en tu
-      dispositivo (ver sección 5), podés escribirnos a
+      Para lo que la app en sí misma guarda en tu dispositivo (sección 5) o para las
+      sugerencias enviadas a través de ella (sección 6), podés escribirnos a
       <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
     </p>
   </section>
-
   <section class="clause" id="menores">
     <div class="clause-head">
       <span class="clause-num">11</span>
@@ -510,10 +529,10 @@
       institución educativa. El tratamiento de datos de estudiantes menores de edad
       se rige por las políticas propias de la institución y por la normativa
       colombiana aplicable a menores. La app en sí misma no recopila información
-      adicional a la que ya existe en el portal.
+      adicional a la que ya existe en el portal, salvo el texto de una sugerencia que
+      el propio estudiante decida enviar voluntariamente.
     </p>
   </section>
-
   <section class="clause" id="cambios">
     <div class="clause-head">
       <span class="clause-num">12</span>
@@ -525,7 +544,6 @@
       actualizar la app.
     </p>
   </section>
-
   <section class="clause" id="contacto">
     <div class="clause-head">
       <span class="clause-num">13</span>
@@ -542,10 +560,8 @@
     </div>
   </section>
 </main>
-
 <footer>
   © 2026 Jaimesequer — Smart Academy. Todos los derechos reservados.
 </footer>
-
 </body>
 </html>
