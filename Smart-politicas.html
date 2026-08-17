@@ -195,19 +195,23 @@
     color: var(--ink-soft);
     margin: 16px 0;
   }
-  table.data-map {
+  .callout.warn {
+    border-left-color: var(--accent-2);
+  }
+  table.data-map, table.titularidad {
     width: 100%;
     border-collapse: collapse;
     margin: 14px 0 6px;
     font-size: 14px;
   }
-  table.data-map th, table.data-map td {
+  table.data-map th, table.data-map td,
+  table.titularidad th, table.titularidad td {
     text-align: left;
     padding: 9px 10px;
     border-bottom: 1px solid var(--line);
     vertical-align: top;
   }
-  table.data-map th {
+  table.data-map th, table.titularidad th {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11.5px;
     letter-spacing: 0.05em;
@@ -250,35 +254,37 @@
     <div>
       <p class="eyebrow">Documento legal · App móvil</p>
       <h1>Política de Privacidad<br>Smart Academy</h1>
-      <p class="meta-line">Última actualización: 27 de julio de 2026 · Jaimesequer</p>
+      <p class="meta-line">Última actualización: 17 de agosto de 2026 · Jaimesequer</p>
     </div>
   </div>
 </header>
 <main id="contenido">
   <p class="lede">
     Esta política explica qué información utiliza la app <strong>Smart Academy</strong>,
-    cómo la utiliza y dónde queda guardada. Está escrita para que puedas leerla sin ser
-    abogado o abogada: si algo no queda claro, escribinos a
+    cómo la utiliza, de dónde proviene y dónde queda guardada. Está escrita para que
+    puedas leerla sin ser abogado o abogada: si algo no queda claro, escribinos a
     <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
   </p>
   <nav class="toc" aria-label="Tabla de contenidos">
     <p>En esta página</p>
     <ol>
       <li><a href="#quienes-somos">1. Quiénes somos</a></li>
-      <li><a href="#que-es-la-app">2. Qué es esta app</a></li>
-      <li><a href="#datos-que-usa">3. Qué información utiliza</a></li>
-      <li><a href="#como-se-usa">4. Cómo se usa esa información</a></li>
-      <li><a href="#donde-se-guarda">5. Dónde se guarda</a></li>
-      <li><a href="#con-quien-se-comparte">6. Con quién se comparte</a></li>
-      <li><a href="#permisos">7. Permisos del dispositivo</a></li>
-      <li><a href="#seguridad">8. Seguridad</a></li>
-      <li><a href="#retencion">9. Retención y eliminación</a></li>
-      <li><a href="#derechos">10. Tus derechos (Habeas Data)</a></li>
-      <li><a href="#menores">11. Menores de edad</a></li>
-      <li><a href="#cambios">12. Cambios a esta política</a></li>
-      <li><a href="#contacto">13. Contacto</a></li>
+      <li><a href="#titularidad">2. Titularidad de la app y de la información</a></li>
+      <li><a href="#que-es-la-app">3. Qué es esta app</a></li>
+      <li><a href="#datos-que-usa">4. Qué información utiliza</a></li>
+      <li><a href="#como-se-usa">5. Cómo se usa esa información</a></li>
+      <li><a href="#donde-se-guarda">6. Dónde se guarda</a></li>
+      <li><a href="#con-quien-se-comparte">7. Con quién se comparte</a></li>
+      <li><a href="#permisos">8. Permisos del dispositivo</a></li>
+      <li><a href="#seguridad">9. Seguridad</a></li>
+      <li><a href="#retencion">10. Retención y eliminación</a></li>
+      <li><a href="#derechos">11. Tus derechos (Habeas Data)</a></li>
+      <li><a href="#menores">12. Menores de edad</a></li>
+      <li><a href="#cambios">13. Cambios a esta política</a></li>
+      <li><a href="#contacto">14. Contacto</a></li>
     </ol>
   </nav>
+
   <section class="clause" id="quienes-somos">
     <div class="clause-head">
       <span class="clause-num">01</span>
@@ -286,47 +292,99 @@
     </div>
     <p>
       Smart Academy es una app desarrollada de forma independiente por
-      <strong>Jaimesequer</strong> (Colombia), publicada en Galaxy Store.
+      <strong>Jaimesequer</strong>, como estudiante, publicada en Galaxy Store.
       Para cualquier consulta sobre privacidad o sobre el funcionamiento de la app,
       podés escribir a <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
     </p>
   </section>
-  <section class="clause" id="que-es-la-app">
+
+  <section class="clause" id="titularidad">
     <div class="clause-head">
       <span class="clause-num">02</span>
+      <h2>Titularidad de la app y de la información</h2>
+    </div>
+    <p>
+      Es importante distinguir dos cosas que a veces se confunden: <strong>la app en
+      sí misma</strong> (el software, su diseño y su código) y <strong>la información
+      que la app muestra</strong> (tus datos académicos, financieros y personales).
+      Son cosas distintas, con dueños distintos:
+    </p>
+    <table class="titularidad">
+      <thead>
+        <tr><th>Elemento</th><th>Titular / responsable</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>La app Smart Academy (código, diseño, funcionamiento)</td>
+          <td>Jaimesequer, desarrollador independiente. Es un proyecto propio,
+            desarrollado por iniciativa personal como estudiante.</td>
+        </tr>
+        <tr>
+          <td>La información académica, financiera y personal que la app muestra</td>
+          <td><strong>Smart Training Society S.A.S.</strong> (NIT 830.033.825-2),
+            institución que administra la academia y su plataforma para
+            estudiantes, <strong>Schoolpack</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      Smart Academy es una app <strong>no oficial</strong>: no está desarrollada,
+      operada ni respaldada por Smart Training Society S.A.S. Es un cliente móvil
+      construido de forma independiente que se conecta al portal oficial de
+      Schoolpack para que los estudiantes puedan usarlo más cómodo desde el celular.
+      Todo dato personal, académico o financiero que la app muestra pertenece y es
+      administrado por Smart Training Society S.A.S., no por el desarrollador de
+      la app.
+    </div>
+    <p>
+      Para usar la app hace falta tener un usuario activo en <strong>Schoolpack</strong>
+      (<a href="https://schoolpack.smart.edu.co/idiomas/alumnos.aspx" target="_blank" rel="noopener">https://schoolpack.smart.edu.co/idiomas/alumnos.aspx</a>),
+      la plataforma oficial para estudiantes de modalidad presencial de la
+      institución. Sin ese usuario, la app no tiene ninguna información que
+      mostrar: todo lo que ves dentro de Smart Academy proviene directamente de
+      esa plataforma.
+    </p>
+  </section>
+
+  <section class="clause" id="que-es-la-app">
+    <div class="clause-head">
+      <span class="clause-num">03</span>
       <h2>Qué es esta app</h2>
     </div>
     <p>
-      Smart Academy es un cliente móvil que se conecta directamente al portal web
-      oficial de tu institución educativa (el mismo sitio al que entrarías desde un
-      navegador). La app no tiene un servidor propio ni una base de datos central para
-      tu información académica: actúa como un puente para que puedas iniciar sesión,
+      Smart Academy es un cliente móvil que se conecta directamente al portal
+      <strong>Schoolpack</strong> de la institución (el mismo sitio al que entrarías
+      desde un navegador, en
+      <a href="https://schoolpack.smart.edu.co/idiomas/alumnos.aspx" target="_blank" rel="noopener">schoolpack.smart.edu.co</a>).
+      La app no tiene un servidor propio ni una base de datos central para tu
+      información académica: actúa como un puente para que puedas iniciar sesión,
       consultar tu información y programar clases desde el celular, de forma más
       cómoda que desde el navegador.
     </p>
     <p>
       Además, la app incluye una función de <strong>Sugerencias</strong> que sí utiliza
       un servicio externo (Google Forms / Google Sheets) para recibir y hacerte
-      seguimiento a las sugerencias que envíes — ver el detalle en las secciones 3 y 6.
+      seguimiento a las sugerencias que envíes — ver el detalle en las secciones 4 y 7.
     </p>
     <div class="callout">
       Esto significa que tu usuario, tu clave y toda tu información académica viajan
-      directamente entre tu dispositivo y el sitio de la institución. Nosotros no
-      operamos un servidor intermedio que reciba o procese esos datos académicos.
+      directamente entre tu dispositivo y Schoolpack. Nosotros no operamos un
+      servidor intermedio que reciba o procese esos datos académicos.
     </div>
   </section>
+
   <section class="clause" id="datos-que-usa">
     <div class="clause-head">
-      <span class="clause-num">03</span>
+      <span class="clause-num">04</span>
       <h2>Qué información utiliza la app</h2>
     </div>
-    <p>La app lee y muestra la misma información que ya existe en el portal de la institución, y además maneja los datos que vos mismo escribís al enviar una sugerencia:</p>
+    <p>La app lee y muestra la misma información que ya existe en Schoolpack, y además maneja los datos que vos mismo escribís al enviar una sugerencia, y una preferencia de personalización visual que no tiene nada que ver con tu información académica:</p>
     <table class="data-map">
       <thead>
         <tr><th>Categoría</th><th>Ejemplos</th></tr>
       </thead>
       <tbody>
-        <tr><td>Acceso</td><td>Usuario y contraseña del portal de la institución</td></tr>
+        <tr><td>Acceso</td><td>Usuario y contraseña de Schoolpack</td></tr>
         <tr><td>Identificación</td><td>Nombre, tipo y número de documento</td></tr>
         <tr><td>Contacto</td><td>Dirección, celular, teléfono, correo electrónico</td></tr>
         <tr><td>Datos personales adicionales</td><td>Estado civil, fecha de nacimiento, estrato, grupo sanguíneo y RH</td></tr>
@@ -334,30 +392,35 @@
         <tr><td>Financiero</td><td>Pagos pendientes y pagos realizados (fechas, valores, recibos)</td></tr>
         <tr><td>Programación de clases</td><td>Sede, día, horario y estado de tus clases (pendientes, programadas, tomadas)</td></tr>
         <tr><td>Sugerencias enviadas</td><td>Nombre, celular, email y el texto de cada sugerencia que envíes, junto con su estado (pendiente, finalizada, descartada) y la respuesta que te den</td></tr>
-        <tr><td>Técnicos</td><td>Cookies de sesión del portal, necesarias para mantenerte con la sesión iniciada</td></tr>
+        <tr><td>Preferencias de la app</td><td>Los colores que elijas en "Color de la app" (Perfil &gt; Color de la app), guardados solo para personalizar cómo se ve la app en tu celular</td></tr>
+        <tr><td>Técnicos</td><td>Cookies de sesión de Schoolpack, necesarias para mantenerte con la sesión iniciada</td></tr>
       </tbody>
     </table>
     <p>
       Los datos de acceso, identificación, contacto, académicos y financieros ya
-      existen en el portal de la institución antes de que la app los muestre: la app
-      no le pide información nueva a la institución ni crea datos que no existieran
-      previamente. Las <strong>sugerencias</strong> son la única excepción: ese texto lo
-      escribís vos dentro de la app y se envía a un servicio externo (ver sección 6),
-      no al portal de la institución.
+      existen en Schoolpack antes de que la app los muestre: la app no le pide
+      información nueva a la institución ni crea datos que no existieran
+      previamente — es información propiedad de Smart Training Society S.A.S. (ver
+      sección 2). Las <strong>sugerencias</strong> son la única excepción: ese texto lo
+      escribís vos dentro de la app y se envía a un servicio externo (ver sección 7),
+      no a Schoolpack. Las <strong>preferencias de color</strong> tampoco vienen de
+      Schoolpack: las elegís vos dentro de la app y solo sirven para cambiar su
+      apariencia visual.
     </p>
   </section>
+
   <section class="clause" id="como-se-usa">
     <div class="clause-head">
-      <span class="clause-num">04</span>
+      <span class="clause-num">05</span>
       <h2>Cómo se usa esa información</h2>
     </div>
     <ul>
-      <li>Para iniciar y mantener tu sesión dentro del portal de la institución.</li>
+      <li>Para iniciar y mantener tu sesión dentro de Schoolpack.</li>
       <li>Para mostrarte tus datos personales, tu información financiera, el estado
         de tu contrato y tu programación de clases dentro de una interfaz de app,
         en vez de un navegador.</li>
       <li>Para permitirte programar o cancelar clases, y cambiar tu contraseña,
-        replicando las mismas acciones que harías en el sitio web.</li>
+        replicando las mismas acciones que harías en Schoolpack.</li>
       <li>Para enviar y hacerte seguimiento a las sugerencias que quieras compartir
         con la institución, incluyendo avisarte (mediante una notificación en tu
         celular) cuando una sugerencia tuya cambia de estado.</li>
@@ -367,6 +430,8 @@
       <li>Para acelerar la app la próxima vez que la abras: en vez de recargar todo
         desde cero, se muestra primero lo último que se leyó, y se actualiza cuando
         tocás "recargar".</li>
+      <li>Para recordar los colores que elegiste en "Color de la app" y mantener esa
+        apariencia la próxima vez que abras la app.</li>
     </ul>
     <p>
       <strong>La app no utiliza tu información con fines publicitarios, no la analiza
@@ -375,44 +440,51 @@
       sugerencias.</strong>
     </p>
   </section>
+
   <section class="clause" id="donde-se-guarda">
     <div class="clause-head">
-      <span class="clause-num">05</span>
+      <span class="clause-num">06</span>
       <h2>Dónde se guarda la información</h2>
     </div>
     <p>
       Toda la información que la app guarda en tu dispositivo usa el almacenamiento
-      seguro y cifrado del sistema operativo (Android Keystore). Concretamente:
+      seguro y cifrado del sistema operativo (Android Keystore), o el almacenamiento
+      local estándar de la app cuando no se trata de datos sensibles (por ejemplo,
+      tus preferencias de color). Concretamente:
     </p>
     <ul>
-      <li>Las cookies de sesión del portal, mientras dura tu sesión.</li>
+      <li>Las cookies de sesión de Schoolpack, mientras dura tu sesión.</li>
       <li>Si elegís esa opción, los datos de acceso de hasta 3 cuentas guardadas,
         para no tener que volver a escribirlos cada vez.</li>
       <li>Una copia de la última información leída (datos personales, financiero,
         contrato, programación) para que la app abra más rápido y funcione aunque
-        el sitio tarde en responder.</li>
+        Schoolpack tarde en responder.</li>
       <li>El historial de las sugerencias que enviaste desde este dispositivo, su
         estado y si ya viste o no el último cambio de estado.</li>
       <li>Un índice interno de los recordatorios de clase que quedaron programados en
         tu celular, para poder cancelarlos si cancelás la clase correspondiente.</li>
+      <li>Los colores que elegiste en "Color de la app", para recordarlos la próxima
+        vez que la abras. Esta preferencia no incluye ningún dato personal.</li>
     </ul>
     <p>
       Nada de lo anterior se envía a servidores propios de Jaimesequer: se queda
       guardado localmente en tu celular. La única información que sale de tu
-      dispositivo hacia un tercero distinto del portal de la institución es el texto
-      de las sugerencias que decidas enviar (ver sección 6).
+      dispositivo hacia un tercero distinto de Schoolpack es el texto de las
+      sugerencias que decidas enviar (ver sección 7).
     </p>
   </section>
+
   <section class="clause" id="con-quien-se-comparte">
     <div class="clause-head">
-      <span class="clause-num">06</span>
+      <span class="clause-num">07</span>
       <h2>Con quién se comparte tu información</h2>
     </div>
     <p>Tu información se comparte con:</p>
     <ul>
-      <li><strong>El portal oficial de tu institución educativa</strong>, porque es
-        de ahí de donde proviene y hacia donde se envían tus acciones (por ejemplo,
-        programar una clase o cambiar tu contraseña).</li>
+      <li><strong>Schoolpack, la plataforma oficial de Smart Training Society
+        S.A.S.</strong> (<a href="https://schoolpack.smart.edu.co/idiomas/alumnos.aspx" target="_blank" rel="noopener">schoolpack.smart.edu.co</a>),
+        porque es de ahí de donde proviene y hacia donde se envían tus acciones
+        (por ejemplo, programar una clase o cambiar tu contraseña).</li>
       <li><strong>Google Forms y Google Sheets (Google LLC)</strong>, únicamente
         cuando enviás una sugerencia desde la app. En ese caso, tu nombre, celular,
         email y el texto de la sugerencia se envían directamente desde tu
@@ -429,15 +501,16 @@
       operamos ninguna base de datos propia con tu información para hacerlo.
     </p>
   </section>
+
   <section class="clause" id="permisos">
     <div class="clause-head">
-      <span class="clause-num">07</span>
+      <span class="clause-num">08</span>
       <h2>Permisos del dispositivo</h2>
     </div>
     <p>La app solicita los siguientes permisos:</p>
     <ul>
-      <li><strong>Acceso a Internet</strong>, necesario para cargar el portal de la
-        institución dentro de la app y para enviar/consultar sugerencias.</li>
+      <li><strong>Acceso a Internet</strong>, necesario para cargar Schoolpack
+        dentro de la app y para enviar/consultar sugerencias.</li>
       <li><strong>Notificaciones</strong>, para poder avisarte cuando tenés una
         clase programada próximamente y cuando una sugerencia tuya cambia de
         estado. Podés desactivarlo desde Ajustes de Android sin que el resto de la
@@ -457,6 +530,16 @@
       <li>Almacenamiento externo del dispositivo</li>
     </ul>
     <p>
+      Algunas pantallas de la app incluyen un ícono de "Copiar HTML (debug)". Es una
+      herramienta de soporte técnico pensada para cuando algo falla: si la tocás,
+      copia al portapapeles de tu celular el contenido de la página de Schoolpack
+      que se está mostrando en ese momento, para que puedas pegarlo y enviárselo al
+      desarrollador si le reportás un problema. Esta copia <strong>solo ocurre si vos
+      tocás ese ícono</strong>; la app no la ejecuta automáticamente ni la envía a
+      ningún lado por sí sola — sos vos quien decide compartir ese contenido, y con
+      quién.
+    </p>
+    <p>
       Por separado, el menú "Contáctanos" de la app puede abrir tu cliente de
       correo, tu marcador telefónico o WhatsApp para que escribas al desarrollador o
       a la institución. Esto abre esas apps externas de tu celular; la app no lee ni
@@ -464,9 +547,10 @@
       momento.
     </p>
   </section>
+
   <section class="clause" id="seguridad">
     <div class="clause-head">
-      <span class="clause-num">08</span>
+      <span class="clause-num">09</span>
       <h2>Seguridad</h2>
     </div>
     <p>
@@ -477,9 +561,10 @@
       tiendas oficiales.
     </p>
   </section>
+
   <section class="clause" id="retencion">
     <div class="clause-head">
-      <span class="clause-num">09</span>
+      <span class="clause-num">10</span>
       <h2>Retención y eliminación de datos</h2>
     </div>
     <p>
@@ -490,53 +575,60 @@
     </p>
     <ul>
       <li>Desinstalando la app, lo que borra por completo todo lo guardado en el
-        dispositivo (incluyendo el historial local de sugerencias y los recordatorios
-        de clase programados), o</li>
+        dispositivo (incluyendo el historial local de sugerencias, tus preferencias
+        de color y los recordatorios de clase programados), o</li>
       <li>Borrando los datos/caché de la app desde Ajustes de Android &gt;
         Aplicaciones &gt; Smart Academy &gt; Almacenamiento.</li>
     </ul>
     <p>
       La eliminación de una sugerencia ya enviada desde la hoja de respuestas de
       Google no está bajo control de la app: si querés que se elimine ese registro
-      puntual, escribinos (sección 13) y lo gestionamos manualmente.
+      puntual, escribinos (sección 14) y lo gestionamos manualmente. Para la
+      eliminación de tu información académica, financiera o personal almacenada en
+      Schoolpack, esa solicitud debe dirigirse directamente a Smart Training
+      Society S.A.S. (ver sección 11), ya que es quien administra esos datos.
     </p>
   </section>
+
   <section class="clause" id="derechos">
     <div class="clause-head">
-      <span class="clause-num">10</span>
+      <span class="clause-num">11</span>
       <h2>Tus derechos (Habeas Data — Colombia)</h2>
     </div>
     <p>
       De acuerdo con la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia, tenés
       derecho a conocer, actualizar, rectificar y solicitar la supresión de tu
-      información personal. La mayor parte de tu información (académica, financiera,
-      de contrato) pertenece y es administrada por la institución educativa, así que
-      esos derechos se ejercen directamente ante la institución, que es quien actúa
-      como responsable del tratamiento de esos datos.
+      información personal. La información académica, financiera y de contrato que
+      la app muestra pertenece y es administrada por <strong>Smart Training Society
+      S.A.S.</strong> (NIT 830.033.825-2), responsable del tratamiento de esos datos
+      a través de Schoolpack, así que esos derechos se ejercen directamente ante la
+      institución.
     </p>
     <p>
-      Para lo que la app en sí misma guarda en tu dispositivo (sección 5) o para las
-      sugerencias enviadas a través de ella (sección 6), podés escribirnos a
+      Para lo que la app en sí misma guarda en tu dispositivo (sección 6) o para las
+      sugerencias enviadas a través de ella (sección 7), podés escribirnos a
       <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a>.
     </p>
   </section>
+
   <section class="clause" id="menores">
     <div class="clause-head">
-      <span class="clause-num">11</span>
+      <span class="clause-num">12</span>
       <h2>Menores de edad</h2>
     </div>
     <p>
-      La app está pensada para estudiantes con una cuenta activa en el portal de la
-      institución educativa. El tratamiento de datos de estudiantes menores de edad
-      se rige por las políticas propias de la institución y por la normativa
-      colombiana aplicable a menores. La app en sí misma no recopila información
-      adicional a la que ya existe en el portal, salvo el texto de una sugerencia que
-      el propio estudiante decida enviar voluntariamente.
+      La app está pensada para estudiantes con una cuenta activa en Schoolpack. El
+      tratamiento de datos de estudiantes menores de edad se rige por las políticas
+      propias de Smart Training Society S.A.S. y por la normativa colombiana
+      aplicable a menores. La app en sí misma no recopila información adicional a
+      la que ya existe en Schoolpack, salvo el texto de una sugerencia que el propio
+      estudiante decida enviar voluntariamente.
     </p>
   </section>
+
   <section class="clause" id="cambios">
     <div class="clause-head">
-      <span class="clause-num">12</span>
+      <span class="clause-num">13</span>
       <h2>Cambios a esta política</h2>
     </div>
     <p>
@@ -545,24 +637,32 @@
       actualizar la app.
     </p>
   </section>
+
   <section class="clause" id="contacto">
     <div class="clause-head">
-      <span class="clause-num">13</span>
+      <span class="clause-num">14</span>
       <h2 style="color: var(--ink);">Contacto</h2>
     </div>
     <div class="contact-card">
       <p class="clause-num" style="margin-bottom:6px;">¿Preguntas sobre esta política?</p>
       <h2>Escribinos</h2>
       <p>
-        Desarrollador: Jaimesequer<br>
+        Desarrollador (app): Jaimesequer<br>
         Correo: <a href="mailto:Jaimesequer@zohomail.com">Jaimesequer@zohomail.com</a><br>
         País: Colombia
       </p>
     </div>
+    <p style="margin-top:16px; font-size: 13.5px;">
+      Para consultas sobre tu información académica o financiera propiamente dicha,
+      recordá que esta pertenece a Smart Training Society S.A.S. (NIT
+      830.033.825-2) a través de la plataforma
+      <a href="https://schoolpack.smart.edu.co/idiomas/alumnos.aspx" target="_blank" rel="noopener">Schoolpack</a>,
+      y debe gestionarse directamente con la institución.
+    </p>
   </section>
 </main>
 <footer>
-  © 2026 Jaimesequer — Smart Academy. Todos los derechos reservados.
+  © 2026 Jaimesequer — Smart Academy (app no oficial). La información mostrada es propiedad de Smart Training Society S.A.S.
 </footer>
 </body>
 </html>
