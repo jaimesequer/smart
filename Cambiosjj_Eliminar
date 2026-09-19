@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eliminar cuenta — Cambios J&amp;J</title>
+<style>
+  :root {
+    --ink: #1c2b28;
+    --ink-soft: #4a5b57;
+    --bg: #fbfaf7;
+    --panel: #ffffff;
+    --line: #e3ded3;
+    --accent: #2f6f5e;
+    --accent-soft: #e7f1ed;
+    --warn-bg: #fff3cd;
+    --warn-ink: #6b5300;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+    line-height: 1.65;
+  }
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 24px 32px;
+  }
+  .eyebrow {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 1.9rem;
+    margin: 10px 0 6px;
+    line-height: 1.2;
+  }
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+  }
+  section { margin-bottom: 34px; }
+  h2 {
+    font-size: 1.15rem;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  .box {
+    background: var(--warn-bg);
+    color: var(--warn-ink);
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  form {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  label {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    margin: 16px 0 6px;
+  }
+  label:first-of-type { margin-top: 0; }
+  input, textarea, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14.5px;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+  .hint {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  button {
+    margin-top: 22px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 5px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover { opacity: 0.92; }
+  #status {
+    margin-top: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13.5px;
+    color: var(--accent);
+    display: none;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    margin: 8px 0 12px;
+  }
+  th, td {
+    text-align: left;
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { background: var(--accent-soft); font-weight: 600; width: 45%; }
+  footer {
+    text-align: center;
+    padding: 30px 24px 60px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">Cambios J&amp;J</div>
+    <h1>Solicitar la eliminación de tu cuenta</h1>
+  </div>
+</header>
+
+<main>
+
+  <section>
+    <p>Desde esta página puedes solicitar la eliminación de tu cuenta de Cambios J&amp;J y de los datos personales asociados, sin necesidad de tener la app instalada.</p>
+    <div class="box">
+      Tu solicitud se procesa manualmente. Recibirás una confirmación por correo dentro de un plazo de hasta <strong>15 días hábiles</strong>.
+    </div>
+  </section>
+
+  <section>
+    <h2>Qué se elimina y qué se conserva</h2>
+    <table>
+      <tr><th>Se elimina</th><td>Nombre, correo, teléfono, fotos de documentos de identidad, preferencias de la cuenta y acceso a la app.</td></tr>
+      <tr><th>Se conserva (obligación legal)</th><td>El historial de transacciones financieras se conserva por el tiempo exigido por la normativa cambiaria y contra el lavado de dinero, incluso después de eliminar la cuenta.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Solicita la eliminación</h2>
+    <form id="delete-form">
+      <label for="fullname">Nombre completo</label>
+      <input type="text" id="fullname" required>
+
+      <label for="email">Correo asociado a tu cuenta</label>
+      <input type="email" id="email" required>
+
+      <label for="phone">Número de teléfono asociado (opcional)</label>
+      <input type="tel" id="phone">
+
+      <label for="reason">Comentario adicional (opcional)</label>
+      <textarea id="reason" placeholder="Ej. motivo de la solicitud, o si además quieres que se elimine únicamente cierta información"></textarea>
+      <div class="hint">Al enviar, se abrirá tu app de correo con un mensaje ya redactado dirigido a soporte. Solo debes confirmar el envío.</div>
+
+      <button type="submit">Solicitar eliminación de cuenta</button>
+      <div id="status">Se abrió tu cliente de correo. Si no se abrió, escribe directamente a <a href="mailto:jaimesequer@zohomail.com">jaimesequer@zohomail.com</a>.</div>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  Cambios J&amp;J — Solicitud de eliminación de cuenta
+</footer>
+
+<script>
+  document.getElementById('delete-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('fullname').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var reason = document.getElementById('reason').value.trim();
+
+    var body = 'Nombre completo: ' + name + '\n' +
+               'Correo de la cuenta: ' + email + '\n' +
+               'Teléfono: ' + (phone || '-') + '\n' +
+               'Comentario: ' + (reason || '-') + '\n\n' +
+               'Solicito la eliminación de mi cuenta y datos personales de Cambios J&J, conforme a la política de privacidad.';
+
+    var mailto = 'mailto:jaimesequer@zohomail.com' +
+                 '?subject=' + encodeURIComponent('Solicitud de eliminación de cuenta - Cambios J&J') +
+                 '&body=' + encodeURIComponent(body);
+
+    window.location.href = mailto;
+    document.getElementById('status').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
