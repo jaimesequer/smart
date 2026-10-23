@@ -2,8 +2,8 @@
 [
   { "titulo": "More Than Friends", "artista": "Inna Ft Daddy Yankee", "archivo": "canciones/1.mp3" },
   { "titulo": "Nombre de la canción 2", "artista": "Artista 2", "archivo": "canciones/2.mp3" },
-  { "titulo": "Nombre de la canción 3", "artista": "Artista 3", "archivo": "canciones/3.mp3" }
-  { "titulo": "Nombre de la canción 3", "artista": "Artista 3", "archivo": "canciones/4.mp3" }
-  { "titulo": "Nombre de la canción 3", "artista": "Artista 3", "archivo": "canciones/5.mp3" }
+  { "titulo": "Nombre de la canción 3", "artista": "Artista 3", "archivo": "canciones/3.mp3" },
+  { "titulo": "Nombre de la canción 3", "artista": "Artista 3", "archivo": "canciones/4.mp3" },
+  { "titulo": "Nombre de la canción 3", "artista": "Artista 3", "archivo": "canciones/5.mp3" },
   { "titulo": "Nombre de la canción 3", "artista": "Artista 3", "archivo": "canciones/6.mp3" }
 ]
