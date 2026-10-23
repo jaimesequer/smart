@@ -1,1 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mis canciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --fondo:#eef1f8; --tinta:#1b2340; --suave:#5b6385; --linea:#d3d9ea; --acento:#d1307a; --blanco:#fff; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--fondo); color:var(--tinta); font-family:"Instrument Sans",system-ui,sans-serif; line-height:1.5; }
+  main { max-width:760px; margin:0 auto; padding:48px 20px 190px; }
+  h1 { font-family:"Bricolage Grotesque",system-ui,sans-serif; font-weight:800; font-size:clamp(2.6rem,9vw,4.6rem); line-height:.95; letter-spacing:-.03em; margin:0 0 24px; }
+  h2 { font-family:"Bricolage Grotesque",system-ui,sans-serif; font-size:1.6rem; margin:0 0 4px; }
+  input[type="text"], input[type="search"] { width:100%; padding:14px 16px; font:inherit; border:2px solid var(--tinta); border-radius:10px; background:var(--blanco); color:var(--tinta); }
+  :is(input,button):focus-visible { outline:3px solid var(--acento); outline-offset:2px; }
+  .pestanas { display:flex; gap:8px; margin-bottom:16px; }
+  .pestanas button, .chip { font:inherit; font-size:.95rem; padding:6px 16px; border:1.5px solid var(--tinta); border-radius:999px; background:transparent; color:var(--tinta); cursor:pointer; }
+  .pestanas button[aria-pressed="true"] { background:var(--tinta); color:#fff; }
+  .estado { font-size:.9rem; color:var(--suave); margin:12px 0 8px; min-height:1.4em; }
+  .nueva { display:flex; gap:8px; margin-bottom:12px; }
+  .nueva button, .pri { font:inherit; font-weight:600; padding:0 20px; min-height:44px; border:0; border-radius:10px; background:var(--tinta); color:#fff; cursor:pointer; }
+  ul { list-style:none; margin:0; padding:0; border-top:2px solid var(--tinta); }
+  li { display:grid; grid-template-columns:44px 1fr auto; gap:14px; align-items:center; padding:14px 0; border-bottom:1px solid var(--linea); }
+  li.sonando .titulo { color:var(--acento); }
+  .titulo { font-weight:600; margin:0; } .meta { color:var(--suave); font-size:.9rem; margin:0; }
+  .texto { min-width:0; } .texto p { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .acc { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+  .play { width:44px; height:44px; border-radius:50%; border:0; background:var(--acento); color:#fff; font-size:1.1rem; cursor:pointer; flex:none; }
+  .mini { font:inherit; font-size:.85rem; padding:6px 10px; min-height:36px; border:1.5px solid var(--tinta); border-radius:8px; background:transparent; color:var(--tinta); cursor:pointer; white-space:nowrap; }
+  .mini.peligro { border-color:#b3261e; color:#b3261e; }
+  .atras { margin-bottom:12px; }
+  dialog { border:2px solid var(--tinta); border-radius:14px; padding:20px; width:min(420px,92vw); background:var(--blanco); color:var(--tinta); }
+  dialog::backdrop { background:rgba(27,35,64,.5); }
+  .opciones { display:flex; flex-direction:column; gap:8px; margin:12px 0; }
+  .opciones .mini { text-align:left; padding:10px 12px; }
+  .barra { position:fixed; left:0; right:0; bottom:0; background:var(--tinta); color:#fff; padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px)); display:none; }
+  .barra.activa { display:block; }
+  .barra-in { max-width:760px; margin:0 auto; }
+  .fila1 { display:flex; align-items:center; gap:8px; }
+  .fila1 p { margin:0 0 0 6px; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.95rem; }
+  .ctl { min-width:40px; height:40px; border-radius:20px; border:0; background:rgba(255,255,255,.15); color:#fff; font:inherit; font-size:.85rem; cursor:pointer; padding:0 8px; }
+  .barra .play { background:#fff; color:var(--tinta); }
+  .fila2 { display:flex; align-items:center; gap:10px; margin-top:8px; font-size:.8rem; }
+  .fila2 input { flex:1; accent-color:var(--acento); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Mis canciones</h1>
+  <div class="pestanas" role="group" aria-label="Vista">
+    <button type="button" id="tabCanciones" aria-pressed="true">Canciones</button>
+    <button type="button" id="tabListas" aria-pressed="false">Mis listas</button>
+  </div>
+  <div id="buscadorWrap"><input id="q" type="search" placeholder="Filtrar por título o artista" aria-label="Filtrar por título o artista"></div>
+  <div id="contenido"></div>
+</main>
+
+<dialog id="dlg">
+  <h2>Agregar a una lista</h2>
+  <div class="opciones" id="opciones"></div>
+  <div class="nueva"><input type="text" id="nuevaEnDlg" placeholder="Nueva lista" aria-label="Nombre de la nueva lista"><button type="button" id="crearEnDlg">Crear</button></div>
+  <button type="button" class="mini" id="cerrarDlg">Cerrar</button>
+</dialog>
+
+<div class="barra" id="barra">
+  <div class="barra-in">
+    <div class="fila1">
+      <button class="ctl" id="bAnt" type="button" aria-label="Anterior">⏮</button>
+      <button class="ctl" id="bMenos" type="button" aria-label="Retroceder 10 segundos">−10</button>
+      <button class="play" id="bPlay" type="button" aria-label="Pausar o reanudar">⏸</button>
+      <button class="ctl" id="bMas" type="button" aria-label="Adelantar 10 segundos">+10</button>
+      <button class="ctl" id="bSig" type="button" aria-label="Siguiente">⏭</button>
+      <p id="bTitulo"></p>
+    </div>
+    <div class="fila2"><span id="tAct">0:00</span><input id="prog" type="range" min="0" max="100" value="0" aria-label="Progreso"><span id="tTot">0:00</span></div>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const audio = new Audio();
+  let canciones = [], actual = null, cola = [];
+  let vista = "canciones", listaAbierta = null, pendiente = null, aviso = "";
+  let listas = leer();
+
+  function leer() { try { return JSON.parse(localStorage.getItem("listas") || "{}"); } catch (e) { return {}; } }
+  function guardar() { try { localStorage.setItem("listas", JSON.stringify(listas)); } catch (e) {} }
+  const porArchivo = a => canciones.find(c => c.archivo === a);
+  const deLista = n => (listas[n] || []).map(porArchivo).filter(Boolean);
+  const fmt = s => isFinite(s) ? Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0") : "0:00";
+
+  function el(t, c, x) { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; }
+  function btn(txt, cls, fn, label) {
+    const b = el("button", cls, txt); b.type = "button";
+    if (label) b.setAttribute("aria-label", label);
+    b.addEventListener("click", fn); return b;
+  }
+
+  async function cargar() {
+    try {
+      const r = await fetch("canciones.json");
+      if (!r.ok) throw new Error();
+      canciones = await r.json();
+    } catch (e) { aviso = "No se pudo cargar canciones.json. Revisa que esté en el repo junto a index.html."; }
+    pintar();
+  }
+
+  function fila(c, items, acciones) {
+    const li = el("li", actual === c ? "sonando" : "");
+    const sonando = actual === c && !audio.paused;
+    li.append(
+      btn(sonando ? "⏸" : "▶", "play", () => alternar(c, items), (sonando ? "Pausar " : "Reproducir ") + c.titulo),
+      (() => { const d = el("div", "texto"); d.append(el("p", "titulo", c.titulo), el("p", "meta", c.artista)); return d; })()
+    );
+    const acc = el("div", "acc"); acciones.forEach(a => acc.appendChild(a)); li.appendChild(acc);
+    return li;
+  }
+
+  function pintar() {
+    const cont = $("contenido"); cont.innerHTML = "";
+    $("tabCanciones").setAttribute("aria-pressed", vista === "canciones");
+    $("tabListas").setAttribute("aria-pressed", vista === "listas");
+    $("buscadorWrap").style.display = vista === "canciones" ? "block" : "none";
+    const estado = el("p", "estado"); estado.setAttribute("aria-live", "polite");
+    cont.appendChild(estado);
+
+    if (vista === "canciones") {
+      const t = $("q").value.trim().toLowerCase();
+      const items = canciones.filter(c => (c.titulo + " " + c.artista).toLowerCase().includes(t));
+      estado.textContent = aviso || (items.length ? items.length + (items.length === 1 ? " canción" : " canciones") : "No hay canciones con esa búsqueda.");
+      const ul = el("ul");
+      items.forEach(c => ul.appendChild(fila(c, items, [btn("+ Lista", "mini", () => abrirDlg(c), "Agregar " + c.titulo + " a una lista")])));
+      cont.appendChild(ul);
+    } else if (!listaAbierta) {
+      const f = el("div", "nueva");
+      const inp = el("input"); inp.type = "text"; inp.id = "nuevaLista"; inp.placeholder = "Nombre de la nueva lista"; inp.setAttribute("aria-label", "Nombre de la nueva lista");
+      const crear = () => { if (crearLista(inp.value)) pintar(); };
+      inp.addEventListener("keydown", e => { if (e.key === "Enter") crear(); });
+      f.append(inp, btn("Crear", "", crear));
+      cont.insertBefore(f, estado);
+      const nombres = Object.keys(listas);
+      estado.textContent = aviso || (nombres.length ? "" : "Aún no tienes listas. Crea una arriba y agrégale canciones desde la pestaña Canciones.");
+      const ul = el("ul");
+      nombres.forEach(n => {
+        const li = el("li");
+        const items = deLista(n);
+        const d = el("div", "texto"); d.append(el("p", "titulo", n), el("p", "meta", items.length + (items.length === 1 ? " canción" : " canciones")));
+        li.append(btn("▶", "play", () => { if (items.length) alternar(items[0], items); }, "Reproducir lista " + n), d,
+          (() => { const a = el("div", "acc"); a.append(btn("Abrir", "mini", () => { listaAbierta = n; aviso = ""; pintar(); }), btn("Borrar", "mini peligro", () => borrarLista(n))); return a; })());
+        ul.appendChild(li);
+      });
+      cont.appendChild(ul);
+    } else {
+      const n = listaAbierta, items = deLista(n);
+      cont.insertBefore(btn("← Mis listas", "mini atras", () => { listaAbierta = null; aviso = ""; pintar(); }), estado);
+      estado.textContent = aviso || (items.length ? items.length + (items.length === 1 ? " canción" : " canciones") + " en " + n : "Esta lista está vacía. Agrega canciones con el botón + Lista.");
+      if (items.length) { const p = btn("▶ Reproducir lista", "pri", () => alternar(items[0], items)); cont.insertBefore(p, estado); }
+      const ul = el("ul");
+      items.forEach((c, i) => ul.appendChild(fila(c, items, [
+        btn("▲", "mini", () => mover(n, i, -1), "Subir " + c.titulo),
+        btn("▼", "mini", () => mover(n, i, 1), "Bajar " + c.titulo),
+        btn("Quitar", "mini peligro", () => quitar(n, c))
+      ])));
+      cont.appendChild(ul);
+    }
+  }
+
+  function crearLista(nombre) {
+    nombre = nombre.trim();
+    if (!nombre) return false;
+    if (listas[nombre]) { aviso = "Ya existe una lista con ese nombre."; pintar(); return false; }
+    listas[nombre] = []; guardar(); aviso = ""; return true;
+  }
+  function borrarLista(n) {
+    if (!confirm("¿Borrar la lista \"" + n + "\"? Las canciones no se borran.")) return;
+    delete listas[n]; guardar(); pintar();
+  }
+  function mover(n, i, d) {
+    const a = listas[n], j = i + d;
+    if (j < 0 || j >= a.length) return;
+    [a[i], a[j]] = [a[j], a[i]]; guardar(); pintar();
+  }
+  function quitar(n, c) { listas[n] = listas[n].filter(x => x !== c.archivo); guardar(); pintar(); }
+
+  // Diálogo para agregar una canción a una lista
+  function abrirDlg(c) {
+    pendiente = c; pintarDlg(); $("dlg").showModal();
+  }
+  function pintarDlg() {
+    const o = $("opciones"); o.innerHTML = "";
+    const nombres = Object.keys(listas);
+    if (!nombres.length) o.appendChild(el("p", "meta", "Aún no tienes listas. Crea la primera abajo."));
+    nombres.forEach(n => {
+      const ya = listas[n].includes(pendiente.archivo);
+      const b = btn(ya ? "✓ " + n + " (ya está)" : n, "mini", () => {
+        if (!ya) { listas[n].push(pendiente.archivo); guardar(); }
+        $("dlg").close(); aviso = "Agregada a " + n; pintar();
+      });
+      o.appendChild(b);
+    });
+  }
+  $("crearEnDlg").addEventListener("click", () => {
+    const v = $("nuevaEnDlg").value;
+    if (crearLista(v)) {
+      listas[v.trim()].push(pendiente.archivo); guardar();
+      $("nuevaEnDlg").value = ""; $("dlg").close(); aviso = "Agregada a " + v.trim(); pintar();
+    }
+  });
+  $("cerrarDlg").addEventListener("click", () => $("dlg").close());
+
+  // Reproductor
+  function alternar(c, items) {
+    if (actual === c) { audio.paused ? audio.play() : audio.pause(); }
+    else {
+      actual = c; cola = items;
+      audio.src = encodeURI(c.archivo);
+      audio.play().catch(() => { aviso = "No se encontró el archivo " + c.archivo; pintar(); });
+      $("bTitulo").textContent = c.titulo + " · " + c.artista;
+      $("barra").classList.add("activa");
+    }
+    pintar();
+  }
+  function siguiente() { const i = cola.indexOf(actual); if (i >= 0 && i < cola.length - 1) alternar(cola[i + 1], cola); }
+  function anterior() {
+    if (audio.currentTime > 3) { audio.currentTime = 0; return; }
+    const i = cola.indexOf(actual); if (i > 0) alternar(cola[i - 1], cola);
+  }
+  $("bPlay").addEventListener("click", () => { if (actual) audio.paused ? audio.play() : audio.pause(); });
+  $("bSig").addEventListener("click", siguiente);
+  $("bAnt").addEventListener("click", anterior);
+  $("bMas").addEventListener("click", () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10); });
+  $("bMenos").addEventListener("click", () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
+  audio.addEventListener("play", () => { $("bPlay").textContent = "⏸"; pintar(); });
+  audio.addEventListener("pause", () => { $("bPlay").textContent = "▶"; pintar(); });
+  audio.addEventListener("ended", () => { $("prog").value = 0; siguiente(); });
+  audio.addEventListener("loadedmetadata", () => { $("tTot").textContent = fmt(audio.duration); });
+  audio.addEventListener("timeupdate", () => {
+    $("tAct").textContent = fmt(audio.currentTime);
+    if (audio.duration) $("prog").value = (audio.currentTime / audio.duration) * 100;
+  });
+  $("prog").addEventListener("input", () => { if (audio.duration) audio.currentTime = ($("prog").value / 100) * audio.duration; });
+
+  $("tabCanciones").addEventListener("click", () => { vista = "canciones"; aviso = ""; pintar(); });
+  $("tabListas").addEventListener("click", () => { vista = "listas"; listaAbierta = null; aviso = ""; pintar(); });
+  $("q").addEventListener("input", () => { aviso = ""; pintar(); });
+
+  cargar();
+</script>
+</body>
+</html>
 
