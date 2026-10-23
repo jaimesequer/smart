@@ -15,8 +15,9 @@
   { "titulo": "Señorita", "artista": "Shawn Mendes Ft Camila Cabello", "artistas": ["Shawn Mendes", "Camila Cabello"], "archivo": "canciones/14.mp3" },
   { "titulo": "BAD", "artista": "ATEEZ", "artistas": ["ATEEZ"], "archivo": "canciones/15.mp3" },
   { "titulo": "Like Jennie", "artista": "Jennie", "artistas": ["Jennie"], "archivo": "canciones/16.mp3" },
+  { "titulo": "New Rules", "artista": "Dua Lipa", "artistas": ["Dua Lipa"], "archivo": "canciones/17.mp3" },
+
   
-  { "titulo": "As It Was", "artista": "Harry Styles", "artistas": ["Harry Styles"], "archivo": "canciones/17.mp3" },
   { "titulo": "Anti-Hero", "artista": "Taylor Swift", "artistas": ["Taylor Swift"], "archivo": "canciones/18.mp3" },
   { "titulo": "Lavender Haze", "artista": "Taylor Swift", "artistas": ["Taylor Swift"], "archivo": "canciones/19.mp3" },
   { "titulo": "Despechá", "artista": "Rosalía", "artistas": ["Rosalía"], "archivo": "canciones/20.mp3" },
