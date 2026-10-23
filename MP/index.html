@@ -8,15 +8,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root { --fondo:#eef1f8; --tinta:#1b2340; --suave:#5b6385; --linea:#d3d9ea; --acento:#57B9FF; --blanco:#fff; }
+  :root { --fondo:#eef1f8; --tinta:#1b2340; --suave:#5b6385; --linea:#d3d9ea; --acento:#57B9FF; --blanco:#fff; --fav:#d6246e; }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--fondo); color:var(--tinta); font-family:"Instrument Sans",system-ui,sans-serif; line-height:1.5; }
-  main { max-width:760px; margin:0 auto; padding:48px 20px 190px; }
+  main { max-width:760px; margin:0 auto; padding:48px 20px 220px; }
   h1 { font-family:"Bricolage Grotesque",system-ui,sans-serif; font-weight:800; font-size:clamp(2.6rem,9vw,4.6rem); line-height:.95; letter-spacing:-.03em; margin:0 0 24px; }
   h2 { font-family:"Bricolage Grotesque",system-ui,sans-serif; font-size:1.6rem; margin:0 0 4px; }
   input[type="text"], input[type="search"] { width:100%; padding:14px 16px; font:inherit; border:2px solid var(--tinta); border-radius:10px; background:var(--blanco); color:var(--tinta); }
   :is(input,button):focus-visible { outline:3px solid var(--acento); outline-offset:2px; }
-  .pestanas { display:flex; gap:8px; margin-bottom:16px; }
+  .pestanas { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
   .pestanas button, .chip { font:inherit; font-size:.95rem; padding:6px 16px; border:1.5px solid var(--tinta); border-radius:999px; background:transparent; color:var(--tinta); cursor:pointer; }
   .pestanas button[aria-pressed="true"] { background:var(--tinta); color:#fff; }
   .estado { font-size:.9rem; color:var(--suave); margin:12px 0 8px; min-height:1.4em; }
@@ -31,6 +31,10 @@
   .play { width:44px; height:44px; border-radius:50%; border:0; background:var(--acento); color:#fff; font-size:1.1rem; cursor:pointer; flex:none; }
   .mini { font:inherit; font-size:.85rem; padding:6px 10px; min-height:36px; border:1.5px solid var(--tinta); border-radius:8px; background:transparent; color:var(--tinta); cursor:pointer; white-space:nowrap; }
   .mini.peligro { border-color:#b3261e; color:#b3261e; }
+  .mini.fav { font-size:1.05rem; min-width:40px; line-height:1; }
+  .mini.fav.on { color:var(--fav); border-color:var(--fav); }
+  .art { font:inherit; background:none; border:0; padding:0; color:var(--suave); cursor:pointer; text-decoration:underline dotted; text-underline-offset:3px; }
+  .art:hover { color:var(--tinta); }
   .atras { margin-bottom:12px; }
   dialog { border:2px solid var(--tinta); border-radius:14px; padding:20px; width:min(420px,92vw); background:var(--blanco); color:var(--tinta); }
   dialog::backdrop { background:rgba(27,35,64,.5); }
@@ -45,14 +49,18 @@
   .barra .play { background:#fff; color:var(--tinta); }
   .fila2 { display:flex; align-items:center; gap:10px; margin-top:8px; font-size:.8rem; }
   .fila2 input { flex:1; accent-color:var(--acento); }
+  .fila3 { display:flex; align-items:center; gap:10px; margin-top:6px; }
+  .fila3 input { width:160px; max-width:55%; accent-color:var(--acento); }
 </style>
 </head>
 <body>
 <main>
   <h1>Mis canciones</h1>
   <div class="pestanas" role="group" aria-label="Vista">
-    <button type="button" id="tabCanciones" aria-pressed="true">Canciones</button>
-    <button type="button" id="tabListas" aria-pressed="false">Mis listas</button>
+    <button type="button" data-v="canciones" aria-pressed="true">Canciones</button>
+    <button type="button" data-v="artistas" aria-pressed="false">Artistas</button>
+    <button type="button" data-v="favoritas" aria-pressed="false">♥ Favoritas</button>
+    <button type="button" data-v="listas" aria-pressed="false">Mis listas</button>
   </div>
   <div id="buscadorWrap"><input id="q" type="search" placeholder="Filtrar por título o artista" aria-label="Filtrar por título o artista"></div>
   <div id="contenido"></div>
@@ -76,6 +84,10 @@
       <p id="bTitulo"></p>
     </div>
     <div class="fila2"><span id="tAct">0:00</span><input id="prog" type="range" min="0" max="100" value="0" aria-label="Progreso"><span id="tTot">0:00</span></div>
+    <div class="fila3">
+      <button class="ctl" id="bMute" type="button" aria-label="Silenciar o activar sonido">🔊</button>
+      <input id="vol" type="range" min="0" max="100" value="100" aria-label="Volumen">
+    </div>
   </div>
 </div>
 
@@ -83,14 +95,31 @@
   const $ = id => document.getElementById(id);
   const audio = new Audio();
   let canciones = [], actual = null, cola = [];
-  let vista = "canciones", listaAbierta = null, pendiente = null, aviso = "";
+  let vista = "canciones", listaAbierta = null, artistaAbierto = null, pendiente = null, aviso = "";
   let listas = leer();
+  let favs = leerFavs();
 
   function leer() { try { return JSON.parse(localStorage.getItem("listas") || "{}"); } catch (e) { return {}; } }
   function guardar() { try { localStorage.setItem("listas", JSON.stringify(listas)); } catch (e) {} }
+  function leerFavs() { try { const a = JSON.parse(localStorage.getItem("favoritas") || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function guardarFavs() { try { localStorage.setItem("favoritas", JSON.stringify(favs)); } catch (e) {} }
   const porArchivo = a => canciones.find(c => c.archivo === a);
   const deLista = n => (listas[n] || []).map(porArchivo).filter(Boolean);
+  const deFavs = () => favs.map(porArchivo).filter(Boolean);
+  const esFav = c => favs.includes(c.archivo);
   const fmt = s => isFinite(s) ? Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0") : "0:00";
+  const plural = (n, s, p) => n + " " + (n === 1 ? s : p);
+
+  // Artistas de una canción: usa el campo "artistas" (arreglo) si existe;
+  // si no, separa el texto de "artista" por Ft, feat, & o coma.
+  function artistasDe(c) {
+    if (Array.isArray(c.artistas) && c.artistas.length) return c.artistas.map(a => String(a).trim()).filter(Boolean);
+    return String(c.artista || "").split(/\s+(?:ft\.?|feat\.?)\s+|\s*[,&]\s*/i).map(s => s.trim()).filter(Boolean);
+  }
+  function cancionesDeArtista(nombre) {
+    const k = nombre.toLowerCase();
+    return canciones.filter(c => artistasDe(c).some(a => a.toLowerCase() === k));
+  }
 
   function el(t, c, x) { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; }
   function btn(txt, cls, fn, label) {
@@ -108,12 +137,37 @@
     pintar();
   }
 
+  function metaArtistas(c) {
+    const p = el("p", "meta");
+    artistasDe(c).forEach((a, i) => {
+      if (i) p.appendChild(document.createTextNode(", "));
+      const b = el("button", "art", a); b.type = "button";
+      b.setAttribute("aria-label", "Ver canciones de " + a);
+      b.addEventListener("click", () => abrirArtista(a));
+      p.appendChild(b);
+    });
+    return p;
+  }
+
+  function favBtn(c) {
+    const on = esFav(c);
+    const b = btn(on ? "♥" : "♡", "mini fav" + (on ? " on" : ""), () => alternarFav(c), (on ? "Quitar de favoritas: " : "Agregar a favoritas: ") + c.titulo);
+    b.setAttribute("aria-pressed", on);
+    return b;
+  }
+  function alternarFav(c) {
+    favs = esFav(c) ? favs.filter(x => x !== c.archivo) : favs.concat(c.archivo);
+    guardarFavs(); pintar();
+  }
+  const accionesBase = c => [favBtn(c), btn("+ Lista", "mini", () => abrirDlg(c), "Agregar " + c.titulo + " a una lista")];
+
   function fila(c, items, acciones) {
     const li = el("li", actual === c ? "sonando" : "");
     const sonando = actual === c && !audio.paused;
+    const d = el("div", "texto"); d.append(el("p", "titulo", c.titulo), metaArtistas(c));
     li.append(
       btn(sonando ? "⏸" : "▶", "play", () => alternar(c, items), (sonando ? "Pausar " : "Reproducir ") + c.titulo),
-      (() => { const d = el("div", "texto"); d.append(el("p", "titulo", c.titulo), el("p", "meta", c.artista)); return d; })()
+      d
     );
     const acc = el("div", "acc"); acciones.forEach(a => acc.appendChild(a)); li.appendChild(acc);
     return li;
@@ -121,19 +175,55 @@
 
   function pintar() {
     const cont = $("contenido"); cont.innerHTML = "";
-    $("tabCanciones").setAttribute("aria-pressed", vista === "canciones");
-    $("tabListas").setAttribute("aria-pressed", vista === "listas");
+    document.querySelectorAll(".pestanas button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === vista));
     $("buscadorWrap").style.display = vista === "canciones" ? "block" : "none";
     const estado = el("p", "estado"); estado.setAttribute("aria-live", "polite");
     cont.appendChild(estado);
 
     if (vista === "canciones") {
       const t = $("q").value.trim().toLowerCase();
-      const items = canciones.filter(c => (c.titulo + " " + c.artista).toLowerCase().includes(t));
-      estado.textContent = aviso || (items.length ? items.length + (items.length === 1 ? " canción" : " canciones") : "No hay canciones con esa búsqueda.");
+      const items = canciones.filter(c => (c.titulo + " " + c.artista + " " + artistasDe(c).join(" ")).toLowerCase().includes(t));
+      estado.textContent = aviso || (items.length ? plural(items.length, "canción", "canciones") : "No hay canciones con esa búsqueda.");
       const ul = el("ul");
-      items.forEach(c => ul.appendChild(fila(c, items, [btn("+ Lista", "mini", () => abrirDlg(c), "Agregar " + c.titulo + " a una lista")])));
+      items.forEach(c => ul.appendChild(fila(c, items, accionesBase(c))));
       cont.appendChild(ul);
+
+    } else if (vista === "artistas" && !artistaAbierto) {
+      const mapa = new Map();
+      canciones.forEach(c => artistasDe(c).forEach(a => {
+        const k = a.toLowerCase();
+        if (!mapa.has(k)) mapa.set(k, { nombre: a, n: 0 });
+        mapa.get(k).n++;
+      }));
+      const arr = [...mapa.values()].sort((x, y) => x.nombre.localeCompare(y.nombre, "es"));
+      estado.textContent = aviso || (arr.length ? plural(arr.length, "artista", "artistas") : "Aún no hay artistas.");
+      const ul = el("ul");
+      arr.forEach(a => {
+        const li = el("li");
+        const d = el("div", "texto"); d.append(el("p", "titulo", a.nombre), el("p", "meta", plural(a.n, "canción", "canciones")));
+        const acc = el("div", "acc"); acc.appendChild(btn("Abrir", "mini", () => abrirArtista(a.nombre), "Ver canciones de " + a.nombre));
+        li.append(btn("▶", "play", () => { const it = cancionesDeArtista(a.nombre); if (it.length) alternar(it[0], it); }, "Reproducir canciones de " + a.nombre), d, acc);
+        ul.appendChild(li);
+      });
+      cont.appendChild(ul);
+
+    } else if (vista === "artistas") {
+      const n = artistaAbierto, items = cancionesDeArtista(n);
+      cont.insertBefore(btn("← Artistas", "mini atras", () => { artistaAbierto = null; aviso = ""; pintar(); }), estado);
+      estado.textContent = aviso || (items.length ? plural(items.length, "canción", "canciones") + " de " + n : "No hay canciones de " + n + ".");
+      if (items.length) cont.insertBefore(btn("▶ Reproducir todas", "pri", () => alternar(items[0], items)), estado);
+      const ul = el("ul");
+      items.forEach(c => ul.appendChild(fila(c, items, accionesBase(c))));
+      cont.appendChild(ul);
+
+    } else if (vista === "favoritas") {
+      const items = deFavs();
+      estado.textContent = aviso || (items.length ? plural(items.length, "canción", "canciones") + " en Favoritas" : "Aún no tienes favoritas. Toca el ♡ en cualquier canción para agregarla aquí.");
+      if (items.length) cont.insertBefore(btn("▶ Reproducir favoritas", "pri", () => alternar(items[0], items)), estado);
+      const ul = el("ul");
+      items.forEach(c => ul.appendChild(fila(c, items, accionesBase(c))));
+      cont.appendChild(ul);
+
     } else if (!listaAbierta) {
       const f = el("div", "nueva");
       const inp = el("input"); inp.type = "text"; inp.id = "nuevaLista"; inp.placeholder = "Nombre de la nueva lista"; inp.setAttribute("aria-label", "Nombre de la nueva lista");
@@ -147,25 +237,32 @@
       nombres.forEach(n => {
         const li = el("li");
         const items = deLista(n);
-        const d = el("div", "texto"); d.append(el("p", "titulo", n), el("p", "meta", items.length + (items.length === 1 ? " canción" : " canciones")));
+        const d = el("div", "texto"); d.append(el("p", "titulo", n), el("p", "meta", plural(items.length, "canción", "canciones")));
         li.append(btn("▶", "play", () => { if (items.length) alternar(items[0], items); }, "Reproducir lista " + n), d,
           (() => { const a = el("div", "acc"); a.append(btn("Abrir", "mini", () => { listaAbierta = n; aviso = ""; pintar(); }), btn("Borrar", "mini peligro", () => borrarLista(n))); return a; })());
         ul.appendChild(li);
       });
       cont.appendChild(ul);
+
     } else {
       const n = listaAbierta, items = deLista(n);
       cont.insertBefore(btn("← Mis listas", "mini atras", () => { listaAbierta = null; aviso = ""; pintar(); }), estado);
-      estado.textContent = aviso || (items.length ? items.length + (items.length === 1 ? " canción" : " canciones") + " en " + n : "Esta lista está vacía. Agrega canciones con el botón + Lista.");
+      estado.textContent = aviso || (items.length ? plural(items.length, "canción", "canciones") + " en " + n : "Esta lista está vacía. Agrega canciones con el botón + Lista.");
       if (items.length) { const p = btn("▶ Reproducir lista", "pri", () => alternar(items[0], items)); cont.insertBefore(p, estado); }
       const ul = el("ul");
       items.forEach((c, i) => ul.appendChild(fila(c, items, [
+        favBtn(c),
         btn("▲", "mini", () => mover(n, i, -1), "Subir " + c.titulo),
         btn("▼", "mini", () => mover(n, i, 1), "Bajar " + c.titulo),
         btn("Quitar", "mini peligro", () => quitar(n, c))
       ])));
       cont.appendChild(ul);
     }
+  }
+
+  function abrirArtista(nombre) {
+    vista = "artistas"; artistaAbierto = nombre; listaAbierta = null; aviso = "";
+    window.scrollTo(0, 0); pintar();
   }
 
   function crearLista(nombre) {
@@ -257,8 +354,27 @@
   });
   $("prog").addEventListener("input", () => { if (audio.duration) audio.currentTime = ($("prog").value / 100) * audio.duration; });
 
-  $("tabCanciones").addEventListener("click", () => { vista = "canciones"; aviso = ""; pintar(); });
-  $("tabListas").addEventListener("click", () => { vista = "listas"; listaAbierta = null; aviso = ""; pintar(); });
+  // Volumen (se recuerda entre visitas)
+  let vol = 1;
+  try { const v = parseFloat(localStorage.getItem("volumen")); if (isFinite(v)) vol = Math.min(1, Math.max(0, v)); } catch (e) {}
+  audio.volume = vol;
+  $("vol").value = Math.round(vol * 100);
+  function iconoVol() {
+    $("bMute").textContent = (audio.muted || audio.volume === 0) ? "🔇" : audio.volume < 0.5 ? "🔉" : "🔊";
+  }
+  $("vol").addEventListener("input", () => {
+    audio.muted = false;
+    audio.volume = $("vol").value / 100;
+    try { localStorage.setItem("volumen", String(audio.volume)); } catch (e) {}
+    iconoVol();
+  });
+  $("bMute").addEventListener("click", () => { audio.muted = !audio.muted; iconoVol(); });
+  iconoVol();
+
+  // Pestañas
+  document.querySelectorAll(".pestanas button").forEach(b => b.addEventListener("click", () => {
+    vista = b.dataset.v; listaAbierta = null; artistaAbierto = null; aviso = ""; pintar();
+  }));
   $("q").addEventListener("input", () => { aviso = ""; pintar(); });
 
   cargar();
