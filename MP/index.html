@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Can</title>
+<title>Mis canciones</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -217,9 +217,23 @@
     else {
       actual = c; cola = items;
       audio.src = encodeURI(c.archivo);
-      audio.play().catch(() => { aviso = "No se encontró el archivo " + c.archivo; pintar(); });
+      audio.play().catch(err => { if (err.name !== "AbortError") diagnosticar(c, err); });
       $("bTitulo").textContent = c.titulo + " · " + c.artista;
       $("barra").classList.add("activa");
+    }
+    pintar();
+  }
+  async function diagnosticar(c, err) {
+    try {
+      const r = await fetch(encodeURI(c.archivo), { method: "HEAD" });
+      if (!r.ok) {
+        aviso = "Error " + r.status + ": el servidor no tiene " + c.archivo + ". Revisa que el nombre y la ruta coincidan exacto, con mayúsculas.";
+      } else {
+        const kb = Math.round((r.headers.get("content-length") || 0) / 1024);
+        aviso = "El archivo existe (" + kb + " KB) pero el navegador no pudo reproducirlo (" + err.name + "). Puede estar dañado o no ser un mp3 válido.";
+      }
+    } catch (e) {
+      aviso = "No se pudo comprobar el archivo (" + err.name + "). Revisa tu conexión.";
     }
     pintar();
   }
@@ -251,4 +265,3 @@
 </script>
 </body>
 </html>
-
