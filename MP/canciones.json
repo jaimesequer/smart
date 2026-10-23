@@ -1,1 +1,6 @@
 
+[
+  { "titulo": "Nombre de la canción 1", "artista": "Artista 1", "archivo": "canciones/cancion1.mp3" },
+  { "titulo": "Nombre de la canción 2", "artista": "Artista 2", "archivo": "canciones/cancion2.mp3" },
+  { "titulo": "Nombre de la canción 3", "artista": "Artista 3", "archivo": "canciones/cancion3.mp3" }
+]
