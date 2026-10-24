@@ -1,0 +1,5 @@
+[
+  { "titulo": "Episodio 1", "serie": "Mi Serie", "temporada": 1, "episodio": 1, "archivo": "videos/serie1-t1e1.mp4" },
+  { "titulo": "Episodio 2", "serie": "Mi Serie", "temporada": 1, "episodio": 2, "archivo": "videos/serie1-t1e2.mp4" },
+  { "titulo": "Episodio 3", "serie": "Mi Serie", "temporada": 1, "episodio": 3, "archivo": "videos/serie1-t1e3.mp4", "portada": "videos/portada-t1e3.jpg" }
+]
