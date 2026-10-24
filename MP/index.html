@@ -10,12 +10,17 @@
 <style>
   :root { --fondo:#eef1f8; --tinta:#1b2340; --suave:#5b6385; --linea:#d3d9ea; --acento:#57B9FF; --blanco:#fff; --fav:#d6246e; }
   * { box-sizing: border-box; }
+  [hidden] { display:none !important; }
   body { margin:0; background:var(--fondo); color:var(--tinta); font-family:"Instrument Sans",system-ui,sans-serif; line-height:1.5; }
-  main { max-width:760px; margin:0 auto; padding:48px 20px 220px; }
+  main { max-width:760px; margin:0 auto; padding:24px 20px 260px; }
+  main.modo-video { padding-bottom:48px; }
   h1 { font-family:"Bricolage Grotesque",system-ui,sans-serif; font-weight:800; font-size:clamp(2.6rem,9vw,4.6rem); line-height:.95; letter-spacing:-.03em; margin:0 0 24px; }
   h2 { font-family:"Bricolage Grotesque",system-ui,sans-serif; font-size:1.6rem; margin:0 0 4px; }
+  h3.grupo { font-family:"Bricolage Grotesque",system-ui,sans-serif; font-size:1.1rem; margin:22px 0 6px; }
   input[type="text"], input[type="search"] { width:100%; padding:14px 16px; font:inherit; border:2px solid var(--tinta); border-radius:10px; background:var(--blanco); color:var(--tinta); }
-  :is(input,button):focus-visible { outline:3px solid var(--acento); outline-offset:2px; }
+  :is(input,button,select,video):focus-visible { outline:3px solid var(--acento); outline-offset:2px; }
+  .tope { display:flex; justify-content:flex-end; margin-bottom:20px; }
+  .modo { font:inherit; font-weight:600; font-size:.95rem; padding:8px 18px; min-height:40px; border:2px solid var(--tinta); border-radius:999px; background:var(--tinta); color:#fff; cursor:pointer; }
   .pestanas { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
   .pestanas button, .chip { font:inherit; font-size:.95rem; padding:6px 16px; border:1.5px solid var(--tinta); border-radius:999px; background:transparent; color:var(--tinta); cursor:pointer; }
   .pestanas button[aria-pressed="true"] { background:var(--tinta); color:#fff; }
@@ -31,6 +36,7 @@
   .play { width:44px; height:44px; border-radius:50%; border:0; background:var(--acento); color:#fff; font-size:1.1rem; cursor:pointer; flex:none; }
   .mini { font:inherit; font-size:.85rem; padding:6px 10px; min-height:36px; border:1.5px solid var(--tinta); border-radius:8px; background:transparent; color:var(--tinta); cursor:pointer; white-space:nowrap; }
   .mini.peligro { border-color:#b3261e; color:#b3261e; }
+  .mini.on { border-color:var(--acento); color:#0a6cb3; }
   .mini.fav { font-size:1.05rem; min-width:40px; line-height:1; }
   .mini.fav.on { color:var(--fav); border-color:var(--fav); }
   .art { font:inherit; background:none; border:0; padding:0; color:var(--suave); cursor:pointer; text-decoration:underline dotted; text-underline-offset:3px; }
@@ -40,30 +46,85 @@
   dialog::backdrop { background:rgba(27,35,64,.5); }
   .opciones { display:flex; flex-direction:column; gap:8px; margin:12px 0; }
   .opciones .mini { text-align:left; padding:10px 12px; }
-  .barra { position:fixed; left:0; right:0; bottom:0; background:var(--tinta); color:#fff; padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px)); display:none; }
+  /* Reproductor de música */
+  .barra { position:fixed; left:0; right:0; bottom:0; display:none; padding:0 10px; z-index:10; }
   .barra.activa { display:block; }
-  .barra-in { max-width:760px; margin:0 auto; }
-  .fila1 { display:flex; align-items:center; gap:8px; }
-  .fila1 p { margin:0 0 0 6px; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.95rem; }
+  .barra-in { max-width:760px; margin:0 auto; padding:16px 20px calc(14px + env(safe-area-inset-bottom,0px)); color:#fff; background:linear-gradient(160deg,#2a3563 0%,#161c38 75%); border-radius:24px 24px 0 0; box-shadow:0 -12px 40px rgba(20,28,60,.35), inset 0 1px 0 rgba(255,255,255,.14); }
+  .pista { display:flex; align-items:center; gap:14px; }
+  .portada { position:relative; width:56px; height:56px; flex:none; border-radius:14px; display:grid; place-items:center; overflow:hidden; font-family:"Bricolage Grotesque",system-ui,sans-serif; font-weight:800; font-size:1.6rem; color:#fff; background:linear-gradient(135deg,#57B9FF,#6a5cff); box-shadow:0 8px 20px rgba(0,0,0,.4); transition:background .4s; }
+  .eq { position:absolute; inset:0; display:none; align-items:center; justify-content:center; gap:3px; background:rgba(0,0,0,.28); }
+  .reproduciendo .eq { display:flex; }
+  .eq i { width:4px; height:22px; background:#fff; border-radius:2px; transform-origin:center; animation:eq .9s ease-in-out infinite; }
+  .eq i:nth-child(2) { animation-delay:-.3s; } .eq i:nth-child(3) { animation-delay:-.6s; }
+  @keyframes eq { 0%,100% { transform:scaleY(.25); } 50% { transform:scaleY(1); } }
+  @media (prefers-reduced-motion:reduce) { .eq i { animation:none; transform:scaleY(.6); } }
+  .info { flex:1; min-width:0; }
+  .bt, .ba { margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bt { font-weight:600; font-size:1.05rem; }
+  .ba { font-size:.88rem; color:rgba(255,255,255,.65); }
+  .volumen { display:flex; align-items:center; gap:6px; }
+  .volumen .ctl { width:40px; height:40px; min-width:40px; padding:0; display:grid; place-items:center; background:transparent; }
+  .volumen input { width:110px; }
+  .progreso { display:flex; align-items:center; gap:10px; margin-top:12px; font-size:.78rem; color:rgba(255,255,255,.7); font-variant-numeric:tabular-nums; }
+  .progreso span { min-width:2.6em; } .progreso span:last-child { text-align:right; }
+  .progreso input { flex:1; }
+  .barra input[type=range] { -webkit-appearance:none; appearance:none; height:20px; margin:0; background:transparent; cursor:pointer; --p:0%; }
+  .barra input[type=range]::-webkit-slider-runnable-track { height:5px; border-radius:3px; background:linear-gradient(to right,#fff var(--p),rgba(255,255,255,.22) var(--p)); }
+  .barra input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; margin-top:-4.5px; border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.4); }
+  .barra input[type=range]::-moz-range-track { height:5px; border-radius:3px; background:rgba(255,255,255,.22); }
+  .barra input[type=range]::-moz-range-progress { height:5px; border-radius:3px; background:#fff; }
+  .barra input[type=range]::-moz-range-thumb { width:14px; height:14px; border:0; border-radius:50%; background:#fff; }
+  .controles { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:6px; }
   .ctl { min-width:40px; height:40px; border-radius:20px; border:0; background:rgba(255,255,255,.15); color:#fff; font:inherit; font-size:.85rem; cursor:pointer; padding:0 8px; }
-  .barra .play { background:#fff; color:var(--tinta); }
-  .fila2 { display:flex; align-items:center; gap:10px; margin-top:8px; font-size:.8rem; }
-  .fila2 input { flex:1; accent-color:var(--acento); }
-  .fila3 { display:flex; align-items:center; gap:10px; margin-top:6px; }
-  .fila3 input { width:160px; max-width:55%; accent-color:var(--acento); }
+  .controles .ctl { width:48px; height:48px; min-width:48px; padding:0; border-radius:50%; display:grid; place-items:center; background:transparent; font-size:.8rem; font-weight:600; }
+  .controles .ctl:hover, .volumen .ctl:hover { background:rgba(255,255,255,.12); }
+  .controles .play { width:62px; height:62px; min-width:62px; background:#fff; color:#161c38; box-shadow:0 8px 22px rgba(0,0,0,.4); }
+  .controles .play:hover { background:#fff; transform:scale(1.05); }
+  .barra svg { width:22px; height:22px; fill:currentColor; display:block; }
+  .controles .play svg { width:28px; height:28px; }
+  @media (max-width:560px) { .volumen input { display:none; } }
+
+  /* Video */
+  #video { width:100%; max-height:70vh; background:#000; border-radius:12px; display:block; }
+  #reproductorV { margin-bottom:8px; }
+  #vTitulo { margin-top:14px; }
+  .vctl { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 4px; }
+  .vctl .ctl { background:var(--tinta); color:#fff; min-width:48px; height:44px; border-radius:22px; }
 </style>
 </head>
 <body>
-<main>
-  <h1>Mis canciones</h1>
-  <div class="pestanas" role="group" aria-label="Vista">
-    <button type="button" data-v="canciones" aria-pressed="true">Canciones</button>
-    <button type="button" data-v="artistas" aria-pressed="false">Artistas</button>
-    <button type="button" data-v="favoritas" aria-pressed="false">♥ Favoritas</button>
-    <button type="button" data-v="listas" aria-pressed="false">Mis listas</button>
+<main id="main">
+  <div class="tope"><button type="button" class="modo" id="modoBtn">Reproductor de Video</button></div>
+  <h1 id="titulo">Mis canciones</h1>
+
+  <!-- ===== MÚSICA ===== -->
+  <div id="vistaMusica">
+    <div class="pestanas" role="group" aria-label="Vista">
+      <button type="button" data-v="canciones" aria-pressed="true">Canciones</button>
+      <button type="button" data-v="artistas" aria-pressed="false">Artistas</button>
+      <button type="button" data-v="favoritas" aria-pressed="false">♥ Favoritas</button>
+      <button type="button" data-v="listas" aria-pressed="false">Mis listas</button>
+    </div>
+    <div id="buscadorWrap"><input id="q" type="search" placeholder="Filtrar por título o artista" aria-label="Filtrar por título o artista"></div>
+    <div id="contenido"></div>
   </div>
-  <div id="buscadorWrap"><input id="q" type="search" placeholder="Filtrar por título o artista" aria-label="Filtrar por título o artista"></div>
-  <div id="contenido"></div>
+
+  <!-- ===== VIDEO ===== -->
+  <div id="vistaVideo" hidden>
+    <div id="reproductorV" hidden>
+      <video id="video" controls playsinline preload="metadata"></video>
+      <h2 id="vTitulo"></h2>
+      <p class="meta" id="vMeta"></p>
+      <div class="vctl">
+        <button class="ctl" id="vAnt" type="button" aria-label="Episodio anterior">⏮</button>
+        <button class="ctl" id="vMenos" type="button" aria-label="Retroceder 10 segundos">−10</button>
+        <button class="ctl" id="vMas" type="button" aria-label="Adelantar 10 segundos">+10</button>
+        <button class="ctl" id="vSig" type="button" aria-label="Episodio siguiente">⏭</button>
+        <button class="ctl" id="vVel" type="button" aria-label="Cambiar velocidad">1x</button>
+      </div>
+    </div>
+    <div id="contenidoV"></div>
+  </div>
 </main>
 
 <dialog id="dlg">
@@ -75,18 +136,21 @@
 
 <div class="barra" id="barra">
   <div class="barra-in">
-    <div class="fila1">
-      <button class="ctl" id="bAnt" type="button" aria-label="Anterior">⏮</button>
-      <button class="ctl" id="bMenos" type="button" aria-label="Retroceder 10 segundos">−10</button>
-      <button class="play" id="bPlay" type="button" aria-label="Pausar o reanudar">⏸</button>
-      <button class="ctl" id="bMas" type="button" aria-label="Adelantar 10 segundos">+10</button>
-      <button class="ctl" id="bSig" type="button" aria-label="Siguiente">⏭</button>
-      <p id="bTitulo"></p>
+    <div class="pista">
+      <div class="portada" id="portada" aria-hidden="true"><span id="portadaLetra">♪</span><div class="eq"><i></i><i></i><i></i></div></div>
+      <div class="info"><p class="bt" id="bTitulo"></p><p class="ba" id="bArtista"></p></div>
+      <div class="volumen">
+        <button class="ctl" id="bMute" type="button" aria-label="Silenciar o activar sonido"></button>
+        <input id="vol" type="range" min="0" max="100" value="100" aria-label="Volumen">
+      </div>
     </div>
-    <div class="fila2"><span id="tAct">0:00</span><input id="prog" type="range" min="0" max="100" value="0" aria-label="Progreso"><span id="tTot">0:00</span></div>
-    <div class="fila3">
-      <button class="ctl" id="bMute" type="button" aria-label="Silenciar o activar sonido">🔊</button>
-      <input id="vol" type="range" min="0" max="100" value="100" aria-label="Volumen">
+    <div class="progreso"><span id="tAct">0:00</span><input id="prog" type="range" min="0" max="100" step="0.1" value="0" aria-label="Progreso"><span id="tTot">0:00</span></div>
+    <div class="controles">
+      <button class="ctl" id="bAnt" type="button" aria-label="Anterior"></button>
+      <button class="ctl" id="bMenos" type="button" aria-label="Retroceder 10 segundos">−10</button>
+      <button class="ctl play" id="bPlay" type="button" aria-label="Pausar o reanudar"></button>
+      <button class="ctl" id="bMas" type="button" aria-label="Adelantar 10 segundos">+10</button>
+      <button class="ctl" id="bSig" type="button" aria-label="Siguiente"></button>
     </div>
   </div>
 </div>
@@ -109,6 +173,31 @@
   const esFav = c => favs.includes(c.archivo);
   const fmt = s => isFinite(s) ? Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0") : "0:00";
   const plural = (n, s, p) => n + " " + (n === 1 ? s : p);
+
+  // Iconos del reproductor
+  const SP = '<path d="M4 9.5v5h3.5l4.5 3.8V5.7L7.5 9.5H4z"/>';
+  const W = d => '<path d="' + d + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+  const svg = inner => '<svg viewBox="0 0 24 24" aria-hidden="true">' + inner + '</svg>';
+  const IC = {
+    play:  svg('<path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/>'),
+    pause: svg('<rect x="6" y="5" width="4.5" height="14" rx="1.2"/><rect x="13.5" y="5" width="4.5" height="14" rx="1.2"/>'),
+    ant:   svg('<rect x="5" y="5" width="2.6" height="14" rx="1.2"/><path d="M19 6.2v11.6a1 1 0 0 1-1.55.84L9.3 12.84a1 1 0 0 1 0-1.68l8.15-5.8A1 1 0 0 1 19 6.2z"/>'),
+    sig:   svg('<rect x="16.4" y="5" width="2.6" height="14" rx="1.2"/><path d="M5 6.2v11.6a1 1 0 0 0 1.55.84l8.15-5.8a1 1 0 0 0 0-1.68L6.55 5.36A1 1 0 0 0 5 6.2z"/>'),
+    mudo:  svg(SP + W("M16 9.5l5 5M21 9.5l-5 5")),
+    bajo:  svg(SP + W("M15.5 9.5a3.5 3.5 0 0 1 0 5")),
+    alto:  svg(SP + W("M15.5 9.5a3.5 3.5 0 0 1 0 5") + W("M18.2 7a7 7 0 0 1 0 10"))
+  };
+  // Pinta el relleno de una barra deslizante (progreso / volumen)
+  function pintarRango(inp) {
+    inp.style.setProperty("--p", ((inp.value - inp.min) / (inp.max - inp.min)) * 100 + "%");
+  }
+  // Portada generada: color según el título + inicial
+  function pintarPortada(c) {
+    let h = 0; for (const ch of c.titulo) h = (h * 31 + ch.charCodeAt(0)) % 360;
+    $("portada").style.background = "linear-gradient(135deg, hsl(" + h + " 85% 62%), hsl(" + ((h + 55) % 360) + " 80% 45%))";
+    $("portadaLetra").textContent = (c.titulo.trim()[0] || "♪").toUpperCase();
+  }
+  $("bAnt").innerHTML = IC.ant; $("bSig").innerHTML = IC.sig; $("bPlay").innerHTML = IC.play;
 
   // Artistas de una canción: usa el campo "artistas" (arreglo) si existe;
   // si no, separa el texto de "artista" por Ft, feat, & o coma.
@@ -315,7 +404,8 @@
       actual = c; cola = items;
       audio.src = encodeURI(c.archivo);
       audio.play().catch(err => { if (err.name !== "AbortError") diagnosticar(c, err); });
-      $("bTitulo").textContent = c.titulo + " · " + c.artista;
+      $("bTitulo").textContent = c.titulo; $("bArtista").textContent = c.artista;
+      pintarPortada(c);
       $("barra").classList.add("activa");
     }
     pintar();
@@ -344,27 +434,28 @@
   $("bAnt").addEventListener("click", anterior);
   $("bMas").addEventListener("click", () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10); });
   $("bMenos").addEventListener("click", () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
-  audio.addEventListener("play", () => { $("bPlay").textContent = "⏸"; pintar(); });
-  audio.addEventListener("pause", () => { $("bPlay").textContent = "▶"; pintar(); });
-  audio.addEventListener("ended", () => { $("prog").value = 0; siguiente(); });
+  audio.addEventListener("play", () => { $("bPlay").innerHTML = IC.pause; $("barra").classList.add("reproduciendo"); pintar(); });
+  audio.addEventListener("pause", () => { $("bPlay").innerHTML = IC.play; $("barra").classList.remove("reproduciendo"); pintar(); });
+  audio.addEventListener("ended", () => { $("prog").value = 0; pintarRango($("prog")); siguiente(); });
   audio.addEventListener("loadedmetadata", () => { $("tTot").textContent = fmt(audio.duration); });
   audio.addEventListener("timeupdate", () => {
     $("tAct").textContent = fmt(audio.currentTime);
     if (audio.duration) $("prog").value = (audio.currentTime / audio.duration) * 100;
+    pintarRango($("prog"));
   });
-  $("prog").addEventListener("input", () => { if (audio.duration) audio.currentTime = ($("prog").value / 100) * audio.duration; });
+  $("prog").addEventListener("input", () => { pintarRango($("prog")); if (audio.duration) audio.currentTime = ($("prog").value / 100) * audio.duration; });
 
   // Volumen (se recuerda entre visitas)
   let vol = 1;
   try { const v = parseFloat(localStorage.getItem("volumen")); if (isFinite(v)) vol = Math.min(1, Math.max(0, v)); } catch (e) {}
   audio.volume = vol;
-  $("vol").value = Math.round(vol * 100);
+  $("vol").value = Math.round(vol * 100); pintarRango($("vol"));
   function iconoVol() {
-    $("bMute").textContent = (audio.muted || audio.volume === 0) ? "🔇" : audio.volume < 0.5 ? "🔉" : "🔊";
+    $("bMute").innerHTML = (audio.muted || audio.volume === 0) ? IC.mudo : audio.volume < 0.5 ? IC.bajo : IC.alto;
   }
   $("vol").addEventListener("input", () => {
     audio.muted = false;
-    audio.volume = $("vol").value / 100;
+    audio.volume = $("vol").value / 100; pintarRango($("vol"));
     try { localStorage.setItem("volumen", String(audio.volume)); } catch (e) {}
     iconoVol();
   });
@@ -377,7 +468,183 @@
   }));
   $("q").addEventListener("input", () => { aviso = ""; pintar(); });
 
+  // =====================================================
+  //  VIDEO (episodios.json)
+  // =====================================================
+  const video = $("video");
+  const leerJSON = (k, d) => { try { const x = JSON.parse(localStorage.getItem(k)); return x == null ? d : x; } catch (e) { return d; } };
+  const guardarJSON = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  let episodios = [], epActual = null, avisoV = "", cargadoV = false, ultimoGuardado = 0;
+  let vistos = leerJSON("vistos", []); if (!Array.isArray(vistos)) vistos = [];
+  let progreso = leerJSON("progresoVideo", {}); if (!progreso || typeof progreso !== "object") progreso = {};
+  const velocidades = [1, 1.25, 1.5, 2, 0.75];
+  let velIdx = Math.max(0, velocidades.indexOf(leerJSON("velocidadVideo", 1)));
+
+  const esVisto = e => vistos.includes(e.archivo);
+  const grupoDe = e => [e.serie, e.temporada ? "Temporada " + e.temporada : ""].filter(Boolean).join(" · ") || "Videos";
+  const etiquetaEp = e => [e.temporada ? "T" + e.temporada : "", e.episodio ? "E" + e.episodio : ""].filter(Boolean).join(" · ");
+
+  async function cargarEpisodios() {
+    try {
+      const r = await fetch("episodios.json");
+      if (!r.ok) throw new Error();
+      const d = await r.json();
+      episodios = Array.isArray(d) ? d : [];
+      episodios.sort((a, b) =>
+        String(a.serie || "").localeCompare(String(b.serie || ""), "es") ||
+        (a.temporada || 0) - (b.temporada || 0) ||
+        (a.episodio || 0) - (b.episodio || 0));
+      avisoV = "";
+    } catch (e) { avisoV = "No se pudo cargar episodios.json. Revisa que esté en el repo junto a index.html."; }
+    cargadoV = true; pintarVideo();
+  }
+
+  function filaVideo(e) {
+    const li = el("li", epActual === e ? "sonando" : "");
+    const sonando = epActual === e && !video.paused;
+    const visto = esVisto(e), t = progreso[e.archivo];
+    let extra = "";
+    if (visto) extra = " · ✓ Visto";
+    else if (t > 5) extra = " · En curso " + fmt(t);
+    const d = el("div", "texto"); d.append(el("p", "titulo", e.titulo), el("p", "meta", (etiquetaEp(e) || "Video") + extra));
+    const acc = el("div", "acc");
+    acc.appendChild(btn(visto ? "✓ Visto" : "Marcar visto", "mini" + (visto ? " on" : ""), () => {
+      if (visto) vistos = vistos.filter(x => x !== e.archivo);
+      else { vistos.push(e.archivo); delete progreso[e.archivo]; guardarJSON("progresoVideo", progreso); }
+      guardarJSON("vistos", vistos); pintarVideo();
+    }, (visto ? "Quitar visto: " : "Marcar como visto: ") + e.titulo));
+    li.append(btn(sonando ? "⏸" : "▶", "play", () => verEp(e), (sonando ? "Pausar " : "Reproducir ") + e.titulo), d, acc);
+    return li;
+  }
+
+  function pintarVideo() {
+    const cont = $("contenidoV"); cont.innerHTML = "";
+    const estado = el("p", "estado"); estado.setAttribute("aria-live", "polite");
+    estado.textContent = avisoV || (!cargadoV ? "Cargando…" : episodios.length ? plural(episodios.length, "episodio", "episodios") : "No hay episodios en episodios.json.");
+
+    const ult = !epActual && episodios.find(e => e.archivo === leerJSON("ultimoEpisodio", ""));
+    if (ult) cont.appendChild(btn("▶ Continuar: " + ult.titulo, "pri", () => verEp(ult)));
+    cont.appendChild(estado);
+
+    let grupoAct = null, ul = null;
+    episodios.forEach(e => {
+      const g = grupoDe(e);
+      if (g !== grupoAct) {
+        grupoAct = g;
+        cont.appendChild(el("h3", "grupo", g));
+        ul = el("ul"); cont.appendChild(ul);
+      }
+      ul.appendChild(filaVideo(e));
+    });
+
+    if (epActual) {
+      $("vTitulo").textContent = epActual.titulo;
+      $("vMeta").textContent = [epActual.serie, etiquetaEp(epActual)].filter(Boolean).join(" · ");
+    }
+    $("vVel").textContent = velocidades[velIdx] + "x";
+  }
+
+  function verEp(e) {
+    if (epActual === e) { video.paused ? video.play() : video.pause(); return; }
+    guardarProgreso();
+    epActual = e; avisoV = "";
+    guardarJSON("ultimoEpisodio", e.archivo);
+    video.src = encodeURI(e.archivo);
+    if (e.portada) video.poster = encodeURI(e.portada); else video.removeAttribute("poster");
+    $("reproductorV").hidden = false;
+    video.play().catch(err => { if (err.name !== "AbortError") diagnosticarV(e, err); });
+    pintarVideo();
+    $("reproductorV").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  async function diagnosticarV(e, err) {
+    try {
+      const r = await fetch(encodeURI(e.archivo), { method: "HEAD" });
+      if (!r.ok) {
+        avisoV = "Error " + r.status + ": el servidor no tiene " + e.archivo + ". Revisa que el nombre y la ruta coincidan exacto, con mayúsculas.";
+      } else {
+        const mb = Math.round((r.headers.get("content-length") || 0) / 1048576);
+        avisoV = "El archivo existe (" + mb + " MB) pero el navegador no pudo reproducirlo (" + err.name + "). Prueba con un mp4 (H.264 + AAC).";
+      }
+    } catch (x) {
+      avisoV = "No se pudo comprobar el archivo (" + err.name + "). Revisa tu conexión.";
+    }
+    pintarVideo();
+  }
+
+  function guardarProgreso() {
+    if (!epActual || !video.duration || esVisto(epActual)) return;
+    if (video.currentTime > 5 && video.currentTime < video.duration - 10) {
+      progreso[epActual.archivo] = Math.floor(video.currentTime);
+      guardarJSON("progresoVideo", progreso);
+    }
+  }
+  function sigEp() { const i = episodios.indexOf(epActual); if (i >= 0 && i < episodios.length - 1) verEp(episodios[i + 1]); }
+  function antEp() {
+    if (video.currentTime > 3) { video.currentTime = 0; return; }
+    const i = episodios.indexOf(epActual); if (i > 0) verEp(episodios[i - 1]);
+  }
+
+  $("vSig").addEventListener("click", sigEp);
+  $("vAnt").addEventListener("click", antEp);
+  $("vMas").addEventListener("click", () => { video.currentTime = Math.min(video.duration || 0, video.currentTime + 10); });
+  $("vMenos").addEventListener("click", () => { video.currentTime = Math.max(0, video.currentTime - 10); });
+  $("vVel").addEventListener("click", () => {
+    velIdx = (velIdx + 1) % velocidades.length;
+    video.playbackRate = velocidades[velIdx];
+    guardarJSON("velocidadVideo", velocidades[velIdx]);
+    $("vVel").textContent = velocidades[velIdx] + "x";
+  });
+
+  video.addEventListener("loadedmetadata", () => {
+    video.playbackRate = velocidades[velIdx];
+    const t = epActual && progreso[epActual.archivo];
+    if (t && t < video.duration - 10) video.currentTime = t;
+  });
+  video.addEventListener("timeupdate", () => {
+    if (Date.now() - ultimoGuardado > 4000) { ultimoGuardado = Date.now(); guardarProgreso(); }
+  });
+  video.addEventListener("play", pintarVideo);
+  video.addEventListener("pause", () => { guardarProgreso(); pintarVideo(); });
+  video.addEventListener("ended", () => {
+    if (epActual) {
+      if (!esVisto(epActual)) vistos.push(epActual.archivo);
+      delete progreso[epActual.archivo];
+      guardarJSON("vistos", vistos); guardarJSON("progresoVideo", progreso);
+    }
+    const i = episodios.indexOf(epActual);
+    if (i >= 0 && i < episodios.length - 1) sigEp(); else pintarVideo();
+  });
+  window.addEventListener("pagehide", guardarProgreso);
+
+  // =====================================================
+  //  Cambio de modo: Música <-> Video
+  // =====================================================
+  function aplicarModo(m) {
+    const v = m === "video";
+    $("vistaMusica").hidden = v;
+    $("vistaVideo").hidden = !v;
+    $("main").classList.toggle("modo-video", v);
+    $("titulo").textContent = v ? "Mis episodios" : "Mis canciones";
+    $("modoBtn").textContent = v ? "Reproductor Música" : "Reproductor de Video";
+    if (v) {
+      audio.pause();
+      $("barra").classList.remove("activa");
+      if (!cargadoV) cargarEpisodios(); else pintarVideo();
+    } else {
+      video.pause();
+      if (actual) $("barra").classList.add("activa");
+      pintar();
+    }
+    window.scrollTo(0, 0);
+    try { localStorage.setItem("modo", m); } catch (e) {}
+  }
+  $("modoBtn").addEventListener("click", () => aplicarModo($("vistaVideo").hidden ? "video" : "musica"));
+
   cargar();
+  let modoInicial = "musica";
+  try { if (localStorage.getItem("modo") === "video") modoInicial = "video"; } catch (e) {}
+  if (modoInicial === "video") aplicarModo("video");
 </script>
 </body>
 </html>
