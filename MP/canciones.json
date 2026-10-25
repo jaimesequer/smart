@@ -22,9 +22,7 @@
   { "titulo": "Olha a Explosão", "artista": "MC Kevinho", "artistas": ["MC Kevinho"], "archivo": "canciones/21.mp3" },
   { "titulo": "Rave de Favela", "artista": "Annita Ft MC Lan y Major Lazer", "artistas": ["Annita", "MC Lan", "Major Lazer"], "archivo": "canciones/22.mp3" },
   { "titulo": "Olvidarte Es Imposible", "artista": "Adriana Lucia", "artistas": ["Adriana Lucia"], "archivo": "canciones/23.mp3" },
-  
-  { "titulo": "Nombre 24", "artista": "Art 24", "artistas": ["Art 24"], "archivo": "canciones/24.mp3" },
-  
+  { "titulo": "Si Te Encuentro Sola", "artista": "Angel", "artistas": ["Angel"], "archivo": "canciones/24.mp3" },
   { "titulo": "Papi", "artista": "Jennifer Lopez", "artistas": ["Jennifer Lopez"], "archivo": "canciones/25.mp3" },
   { "titulo": "Peek-A-Boo", "artista": "Siouxsie and The Banshees", "artistas": ["Siouxsie and The Banshees"], "archivo": "canciones/26.mp3" },
   { "titulo": "Cáscara de Coco", "artista": "Villano Antillano", "artistas": ["Villano Antillano"], "archivo": "canciones/27.mp3" },
@@ -56,6 +54,4 @@
   { "titulo": "Nombre 52", "artista": "Art 52", "artistas": ["Art 52"], "archivo": "canciones/52.mp3" },
   { "titulo": "Nombre 53", "artista": "Art 53", "artistas": ["Art 53"], "archivo": "canciones/53.mp3" },
   { "titulo": "Nombre 54", "artista": "Art 54", "artistas": ["Art 54"], "archivo": "canciones/54.mp3" }
-
-
 ]
