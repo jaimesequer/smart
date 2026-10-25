@@ -28,7 +28,9 @@
   { "titulo": "Cáscara de Coco", "artista": "Villano Antillano", "artistas": ["Villano Antillano"], "archivo": "canciones/27.mp3" },
   
   { "titulo": "Nombre 28", "artista": "Art 28", "artistas": ["Art 28"], "archivo": "canciones/28.mp3" },
-  { "titulo": "Nombre 29", "artista": "Art 29", "artistas": ["Art 29"], "archivo": "canciones/29.mp3" },
+  
+  { "titulo": "Nombre 29", "Adiós Amor": "Luis Mateus Ft David Rendón y La Nueva Generación", "artistas": ["Luis Mateus", "David Rendón", "La Nueva Generación"], "archivo": "canciones/29.mp3" },
+  
   { "titulo": "Nombre 30", "artista": "Art 30", "artistas": ["Art 30"], "archivo": "canciones/30.mp3" },
   { "titulo": "Nombre 31", "artista": "Art 31", "artistas": ["Art 31"], "archivo": "canciones/31.mp3" },
   { "titulo": "Nombre 32", "artista": "Art 32", "artistas": ["Art 32"], "archivo": "canciones/32.mp3" },
