@@ -32,10 +32,10 @@
   { "titulo": "Nombre 29", "Adiós Amor": "Luis Mateus Ft David Rendón y La Nueva Generación", "artistas": ["Luis Mateus", "David Rendón", "La Nueva Generación"], "archivo": "canciones/29.mp3" },
   { "titulo": "Me Porto Bonito", "artista": "Bad Bunny Ft Chencho Corleone", "artistas": ["Bad Bunny", "Chencho Corleone"], "archivo": "canciones/30.mp3" },
   { "titulo": "BbY WOW", "artista": "Karol G", "artistas": ["Karol G"], "archivo": "canciones/31.mp3" },
+  { "titulo": "Evidencias", "artista": "Ana Gabriel", "artistas": ["Ana Gabriel"], "archivo": "canciones/32.mp3" },
+  { "titulo": "Simplemente Amigos", "artista": "Ana Gabriel", "artistas": ["Ana Gabriel"], "archivo": "canciones/33.mp3" },
+  { "titulo": "El Cigarrillo", "artista": "Ana Gabriel", "artistas": ["Ana Gabriel"], "archivo": "canciones/34.mp3" },
   
-  { "titulo": "Nombre 32", "artista": "Art 32", "artistas": ["Art 32"], "archivo": "canciones/32.mp3" },
-  { "titulo": "Nombre 33", "artista": "Art 33", "artistas": ["Art 33"], "archivo": "canciones/33.mp3" },
-  { "titulo": "Nombre 34", "artista": "Art 34", "artistas": ["Art 34"], "archivo": "canciones/34.mp3" },
   { "titulo": "Nombre 35", "artista": "Art 35", "artistas": ["Art 35"], "archivo": "canciones/35.mp3" },
   { "titulo": "Nombre 36", "artista": "Art 36", "artistas": ["Art 36"], "archivo": "canciones/36.mp3" },
   { "titulo": "Nombre 37", "artista": "Art 37", "artistas": ["Art 37"], "archivo": "canciones/37.mp3" },
