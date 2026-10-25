@@ -48,10 +48,10 @@
   { "titulo": "Te Puse A Perder", "artista": "Javier Ramirez Ft Amara Que Linda", "artistas": ["Javier Ramirez", "Amara Que Linda"], "archivo": "canciones/45.mp3" },
   { "titulo": "Caray", "artista": "Juan Gabriel", "artistas": ["Juan Gabriel"], "archivo": "canciones/46.mp3" },
   { "titulo": "Claridad", "artista": "Menudo", "artistas": ["Menudo"], "archivo": "canciones/47.mp3" },
+  { "titulo": "Dame Un Beso", "artista": "Yuri", "artistas": ["Yuri"], "archivo": "canciones/48.mp3" },
+  { "titulo": "La Cita", "artista": "Galy Galiano", "artistas": ["Galy Galiano"], "archivo": "canciones/49.mp3" },
+  { "titulo": "Maldito El Tiempo", "artista": "Michael El Buenón", "artistas": ["Michael El Buenón"], "archivo": "canciones/50.mp3" },
   
-  { "titulo": "Nombre 48", "artista": "Art 48", "artistas": ["Art 48"], "archivo": "canciones/48.mp3" },
-  { "titulo": "Nombre 49", "artista": "Art 49", "artistas": ["Art 49"], "archivo": "canciones/49.mp3" },
-  { "titulo": "Nombre 50", "artista": "Art 50", "artistas": ["Art 50"], "archivo": "canciones/50.mp3" },
   { "titulo": "Nombre 51", "artista": "Art 51", "artistas": ["Art 51"], "archivo": "canciones/51.mp3" },
   { "titulo": "Nombre 52", "artista": "Art 52", "artistas": ["Art 52"], "archivo": "canciones/52.mp3" },
   { "titulo": "Nombre 53", "artista": "Art 53", "artistas": ["Art 53"], "archivo": "canciones/53.mp3" },
