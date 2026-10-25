@@ -36,9 +36,9 @@
   { "titulo": "Simplemente Amigos", "artista": "Ana Gabriel", "artistas": ["Ana Gabriel"], "archivo": "canciones/33.mp3" },
   { "titulo": "El Cigarrillo", "artista": "Ana Gabriel", "artistas": ["Ana Gabriel"], "archivo": "canciones/34.mp3" },
   { "titulo": "Quién Como Tú", "artista": "Ana Gabriel", "artistas": ["Ana Gabriel"], "archivo": "canciones/35.mp3" },
+  { "titulo": "El Jardín Prohibido", "artista": "Álex Bueno", "artistas": ["Álex Bueno"], "archivo": "canciones/36.mp3" },
+  { "titulo": "Ain't Your Mama", "artista": "Jennifer Lopez", "artistas": ["Jennifer Lopez"], "archivo": "canciones/37.mp3" },
   
-  { "titulo": "Nombre 36", "artista": "Art 36", "artistas": ["Art 36"], "archivo": "canciones/36.mp3" },
-  { "titulo": "Nombre 37", "artista": "Art 37", "artistas": ["Art 37"], "archivo": "canciones/37.mp3" },
   { "titulo": "Nombre 38", "artista": "Art 38", "artistas": ["Art 38"], "archivo": "canciones/38.mp3" },
   { "titulo": "Nombre 39", "artista": "Art 39", "artistas": ["Art 39"], "archivo": "canciones/39.mp3" },
   { "titulo": "Nombre 40", "artista": "Art 40", "artistas": ["Art 40"], "archivo": "canciones/40.mp3" },
