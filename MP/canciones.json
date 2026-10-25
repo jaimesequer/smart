@@ -38,7 +38,24 @@
   { "titulo": "Nombre 34", "artista": "Art 34", "artistas": ["Art 34"], "archivo": "canciones/34.mp3" },
   { "titulo": "Nombre 35", "artista": "Art 35", "artistas": ["Art 35"], "archivo": "canciones/35.mp3" },
   { "titulo": "Nombre 36", "artista": "Art 36", "artistas": ["Art 36"], "archivo": "canciones/36.mp3" },
-  { "titulo": "Nombre 37", "artista": "Art 37", "artistas": ["Art 37"], "archivo": "canciones/37.mp3" }
+  { "titulo": "Nombre 37", "artista": "Art 37", "artistas": ["Art 37"], "archivo": "canciones/37.mp3" },
+  { "titulo": "Nombre 38", "artista": "Art 38", "artistas": ["Art 38"], "archivo": "canciones/38.mp3" },
+  { "titulo": "Nombre 39", "artista": "Art 39", "artistas": ["Art 39"], "archivo": "canciones/39.mp3" },
+  { "titulo": "Nombre 40", "artista": "Art 40", "artistas": ["Art 40"], "archivo": "canciones/40.mp3" },
+  { "titulo": "Nombre 41", "artista": "Art 41", "artistas": ["Art 41"], "archivo": "canciones/41.mp3" },
+  { "titulo": "Nombre 42", "artista": "Art 42", "artistas": ["Art 42"], "archivo": "canciones/42.mp3" },
+  { "titulo": "Nombre 43", "artista": "Art 43", "artistas": ["Art 43"], "archivo": "canciones/43.mp3" },
+  { "titulo": "Nombre 44", "artista": "Art 44", "artistas": ["Art 44"], "archivo": "canciones/44.mp3" },
+  { "titulo": "Nombre 45", "artista": "Art 45", "artistas": ["Art 45"], "archivo": "canciones/45.mp3" },
+  { "titulo": "Nombre 46", "artista": "Art 46", "artistas": ["Art 46"], "archivo": "canciones/46.mp3" },
+  { "titulo": "Nombre 47", "artista": "Art 47", "artistas": ["Art 47"], "archivo": "canciones/47.mp3" },
+  { "titulo": "Nombre 48", "artista": "Art 48", "artistas": ["Art 48"], "archivo": "canciones/48.mp3" },
+  { "titulo": "Nombre 49", "artista": "Art 49", "artistas": ["Art 49"], "archivo": "canciones/49.mp3" },
+  { "titulo": "Nombre 50", "artista": "Art 50", "artistas": ["Art 50"], "archivo": "canciones/50.mp3" },
+  { "titulo": "Nombre 51", "artista": "Art 51", "artistas": ["Art 51"], "archivo": "canciones/51.mp3" },
+  { "titulo": "Nombre 52", "artista": "Art 52", "artistas": ["Art 52"], "archivo": "canciones/52.mp3" },
+  { "titulo": "Nombre 53", "artista": "Art 53", "artistas": ["Art 53"], "archivo": "canciones/53.mp3" },
+  { "titulo": "Nombre 54", "artista": "Art 54", "artistas": ["Art 54"], "archivo": "canciones/54.mp3" }
 
 
 ]
