@@ -26,8 +26,8 @@
   { "titulo": "Nombre 24", "artista": "Art 24", "artistas": ["Art 24"], "archivo": "canciones/24.mp3" },
   
   { "titulo": "Papi", "artista": "Jennifer Lopez", "artistas": ["Jennifer Lopez"], "archivo": "canciones/25.mp3" },
+  { "titulo": "Peek-A-Boo", "artista": "Siouxsie and The Banshees", "artistas": ["Siouxsie and The Banshees"], "archivo": "canciones/26.mp3" },
   
-  { "titulo": "Nombre 26", "artista": "Art 26", "artistas": ["Art 26"], "archivo": "canciones/26.mp3" },
   { "titulo": "Nombre 27", "artista": "Art 27", "artistas": ["Art 27"], "archivo": "canciones/27.mp3" }
 
 ]
