@@ -39,10 +39,10 @@
   { "titulo": "El Jardín Prohibido", "artista": "Álex Bueno", "artistas": ["Álex Bueno"], "archivo": "canciones/36.mp3" },
   { "titulo": "Ain't Your Mama", "artista": "Jennifer Lopez", "artistas": ["Jennifer Lopez"], "archivo": "canciones/37.mp3" },
   { "titulo": "Balada", "artista": "Gusttavo Lima", "artistas": ["Gusttavo Lima"], "archivo": "canciones/38.mp3" },
+  { "titulo": "Amores Como El Nuestro", "artista": "Jerry Rivera", "artistas": ["Jerry Rivera"], "archivo": "canciones/39.mp3" },
+  { "titulo": "La Fuga", "artista": "Jiggy Drama", "artistas": ["Jiggy Drama"], "archivo": "canciones/40.mp3" },
+  { "titulo": "¿Por Qué Me Haces Llorar?", "artista": "Juan Gabriel", "artistas": ["Juan Gabriel"], "archivo": "canciones/41.mp3" },
   
-  { "titulo": "Nombre 39", "artista": "Art 39", "artistas": ["Art 39"], "archivo": "canciones/39.mp3" },
-  { "titulo": "Nombre 40", "artista": "Art 40", "artistas": ["Art 40"], "archivo": "canciones/40.mp3" },
-  { "titulo": "Nombre 41", "artista": "Art 41", "artistas": ["Art 41"], "archivo": "canciones/41.mp3" },
   { "titulo": "Nombre 42", "artista": "Art 42", "artistas": ["Art 42"], "archivo": "canciones/42.mp3" },
   { "titulo": "Nombre 43", "artista": "Art 43", "artistas": ["Art 43"], "archivo": "canciones/43.mp3" },
   { "titulo": "Nombre 44", "artista": "Art 44", "artistas": ["Art 44"], "archivo": "canciones/44.mp3" },
