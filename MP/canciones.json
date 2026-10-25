@@ -29,7 +29,7 @@
   
   { "titulo": "Nombre 28", "artista": "Art 28", "artistas": ["Art 28"], "archivo": "canciones/28.mp3" },
   
-  { "titulo": "Nombre 29", "Adiós Amor": "Luis Mateus Ft David Rendón y La Nueva Generación", "artistas": ["Luis Mateus", "David Rendón", "La Nueva Generación"], "archivo": "canciones/29.mp3" },
+  { "titulo": "Adiós Amor", "artista": "Luis Mateus Ft David Rendón y La Nueva Generación", "artistas": ["Luis Mateus", "David Rendón", "La Nueva Generación"], "archivo": "canciones/29.mp3" },
   { "titulo": "Me Porto Bonito", "artista": "Bad Bunny Ft Chencho Corleone", "artistas": ["Bad Bunny", "Chencho Corleone"], "archivo": "canciones/30.mp3" },
   { "titulo": "BbY WOW", "artista": "Karol G", "artistas": ["Karol G"], "archivo": "canciones/31.mp3" },
   { "titulo": "Evidencias", "artista": "Ana Gabriel", "artistas": ["Ana Gabriel"], "archivo": "canciones/32.mp3" },
