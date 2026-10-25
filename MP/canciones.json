@@ -27,8 +27,8 @@
   
   { "titulo": "Papi", "artista": "Jennifer Lopez", "artistas": ["Jennifer Lopez"], "archivo": "canciones/25.mp3" },
   { "titulo": "Peek-A-Boo", "artista": "Siouxsie and The Banshees", "artistas": ["Siouxsie and The Banshees"], "archivo": "canciones/26.mp3" },
+  { "titulo": "Cáscara de Coco", "artista": "Villano Antillano", "artistas": ["Villano Antillano"], "archivo": "canciones/27.mp3" },
   
-  { "titulo": "Nombre 27", "artista": "Art 27", "artistas": ["Art 27"], "archivo": "canciones/27.mp3" },
   { "titulo": "Nombre 28", "artista": "Art 28", "artistas": ["Art 28"], "archivo": "canciones/28.mp3" },
   { "titulo": "Nombre 29", "artista": "Art 29", "artistas": ["Art 29"], "archivo": "canciones/29.mp3" },
   { "titulo": "Nombre 30", "artista": "Art 30", "artistas": ["Art 30"], "archivo": "canciones/30.mp3" },
