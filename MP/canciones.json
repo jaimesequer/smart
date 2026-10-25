@@ -17,9 +17,9 @@
   { "titulo": "Like Jennie", "artista": "Jennie", "artistas": ["Jennie"], "archivo": "canciones/16.mp3" },
   { "titulo": "New Rules", "artista": "Dua Lipa", "artistas": ["Dua Lipa"], "archivo": "canciones/17.mp3" },
   { "titulo": "No Roots", "artista": "Alice Merton", "artistas": ["Alice Merton"], "archivo": "canciones/18.mp3" },
-  
-  { "titulo": "NOMBRE 19", "artista": "Art 19", "artistas": ["Art 19"], "archivo": "canciones/19.mp3" },
+  { "titulo": "Me Rehúso", "artista": "Danny Ocean", "artistas": ["Danny Ocean"], "archivo": "canciones/19.mp3" },
   { "titulo": "J Christ", "artista": "Lil Nas X", "artistas": ["Lil Nas X"], "archivo": "canciones/20.mp3" },
+  
   { "titulo": "Nombre 21", "artista": "Art 21", "artistas": ["Art 21", "Art 21-2"], "archivo": "canciones/21.mp3" },
   { "titulo": "Nombre 22", "artista": "Art 22", "artistas": ["Art 22"], "archivo": "canciones/22.mp3" },
   { "titulo": "Nombre 23", "artista": "Art 23", "artistas": ["Art 23"], "archivo": "canciones/23.mp3" },
