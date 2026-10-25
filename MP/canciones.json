@@ -42,10 +42,10 @@
   { "titulo": "Amores Como El Nuestro", "artista": "Jerry Rivera", "artistas": ["Jerry Rivera"], "archivo": "canciones/39.mp3" },
   { "titulo": "La Fuga", "artista": "Jiggy Drama", "artistas": ["Jiggy Drama"], "archivo": "canciones/40.mp3" },
   { "titulo": "¿Por Qué Me Haces Llorar?", "artista": "Juan Gabriel", "artistas": ["Juan Gabriel"], "archivo": "canciones/41.mp3" },
+  { "titulo": "Hasta Ese Día", "artista": "Lasso", "artistas": ["Lasso"], "archivo": "canciones/42.mp3" },
+  { "titulo": "Cheri Cheri Lady", "artista": "Modern Talking", "artistas": ["Modern Talking"], "archivo": "canciones/43.mp3" },
+  { "titulo": "Muevelo Pa Mi", "artista": "GusToso", "artistas": ["GusToso"], "archivo": "canciones/44.mp3" },
   
-  { "titulo": "Nombre 42", "artista": "Art 42", "artistas": ["Art 42"], "archivo": "canciones/42.mp3" },
-  { "titulo": "Nombre 43", "artista": "Art 43", "artistas": ["Art 43"], "archivo": "canciones/43.mp3" },
-  { "titulo": "Nombre 44", "artista": "Art 44", "artistas": ["Art 44"], "archivo": "canciones/44.mp3" },
   { "titulo": "Nombre 45", "artista": "Art 45", "artistas": ["Art 45"], "archivo": "canciones/45.mp3" },
   { "titulo": "Nombre 46", "artista": "Art 46", "artistas": ["Art 46"], "archivo": "canciones/46.mp3" },
   { "titulo": "Nombre 47", "artista": "Art 47", "artistas": ["Art 47"], "archivo": "canciones/47.mp3" },
