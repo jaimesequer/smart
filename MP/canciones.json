@@ -46,9 +46,9 @@
   { "titulo": "Cheri Cheri Lady", "artista": "Modern Talking", "artistas": ["Modern Talking"], "archivo": "canciones/43.mp3" },
   { "titulo": "Muevelo Pa Mi", "artista": "GusToso", "artistas": ["GusToso"], "archivo": "canciones/44.mp3" },
   { "titulo": "Te Puse A Perder", "artista": "Javier Ramirez Ft Amara Que Linda", "artistas": ["Javier Ramirez", "Amara Que Linda"], "archivo": "canciones/45.mp3" },
+  { "titulo": "Caray", "artista": "Juan Gabriel", "artistas": ["Juan Gabriel"], "archivo": "canciones/46.mp3" },
+  { "titulo": "Claridad", "artista": "Menudo", "artistas": ["Menudo"], "archivo": "canciones/47.mp3" },
   
-  { "titulo": "Nombre 46", "artista": "Art 46", "artistas": ["Art 46"], "archivo": "canciones/46.mp3" },
-  { "titulo": "Nombre 47", "artista": "Art 47", "artistas": ["Art 47"], "archivo": "canciones/47.mp3" },
   { "titulo": "Nombre 48", "artista": "Art 48", "artistas": ["Art 48"], "archivo": "canciones/48.mp3" },
   { "titulo": "Nombre 49", "artista": "Art 49", "artistas": ["Art 49"], "archivo": "canciones/49.mp3" },
   { "titulo": "Nombre 50", "artista": "Art 50", "artistas": ["Art 50"], "archivo": "canciones/50.mp3" },
