@@ -38,8 +38,8 @@
   { "titulo": "Quién Como Tú", "artista": "Ana Gabriel", "artistas": ["Ana Gabriel"], "archivo": "canciones/35.mp3" },
   { "titulo": "El Jardín Prohibido", "artista": "Álex Bueno", "artistas": ["Álex Bueno"], "archivo": "canciones/36.mp3" },
   { "titulo": "Ain't Your Mama", "artista": "Jennifer Lopez", "artistas": ["Jennifer Lopez"], "archivo": "canciones/37.mp3" },
+  { "titulo": "Balada", "artista": "Gusttavo Lima", "artistas": ["Gusttavo Lima"], "archivo": "canciones/38.mp3" },
   
-  { "titulo": "Nombre 38", "artista": "Art 38", "artistas": ["Art 38"], "archivo": "canciones/38.mp3" },
   { "titulo": "Nombre 39", "artista": "Art 39", "artistas": ["Art 39"], "archivo": "canciones/39.mp3" },
   { "titulo": "Nombre 40", "artista": "Art 40", "artistas": ["Art 40"], "archivo": "canciones/40.mp3" },
   { "titulo": "Nombre 41", "artista": "Art 41", "artistas": ["Art 41"], "archivo": "canciones/41.mp3" },
