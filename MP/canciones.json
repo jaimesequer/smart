@@ -30,8 +30,8 @@
   { "titulo": "Nombre 28", "artista": "Art 28", "artistas": ["Art 28"], "archivo": "canciones/28.mp3" },
   
   { "titulo": "Nombre 29", "Adiós Amor": "Luis Mateus Ft David Rendón y La Nueva Generación", "artistas": ["Luis Mateus", "David Rendón", "La Nueva Generación"], "archivo": "canciones/29.mp3" },
+  { "titulo": "Me Porto Bonito", "artista": "Bad Bunny Ft Chencho Corleone", "artistas": ["Bad Bunny", "Chencho Corleone"], "archivo": "canciones/30.mp3" },
   
-  { "titulo": "Nombre 30", "artista": "Art 30", "artistas": ["Art 30"], "archivo": "canciones/30.mp3" },
   { "titulo": "Nombre 31", "artista": "Art 31", "artistas": ["Art 31"], "archivo": "canciones/31.mp3" },
   { "titulo": "Nombre 32", "artista": "Art 32", "artistas": ["Art 32"], "archivo": "canciones/32.mp3" },
   { "titulo": "Nombre 33", "artista": "Art 33", "artistas": ["Art 33"], "archivo": "canciones/33.mp3" },
