@@ -28,6 +28,17 @@
   { "titulo": "Papi", "artista": "Jennifer Lopez", "artistas": ["Jennifer Lopez"], "archivo": "canciones/25.mp3" },
   { "titulo": "Peek-A-Boo", "artista": "Siouxsie and The Banshees", "artistas": ["Siouxsie and The Banshees"], "archivo": "canciones/26.mp3" },
   
-  { "titulo": "Nombre 27", "artista": "Art 27", "artistas": ["Art 27"], "archivo": "canciones/27.mp3" }
+  { "titulo": "Nombre 27", "artista": "Art 27", "artistas": ["Art 27"], "archivo": "canciones/27.mp3" },
+  { "titulo": "Nombre 28", "artista": "Art 28", "artistas": ["Art 28"], "archivo": "canciones/28.mp3" },
+  { "titulo": "Nombre 29", "artista": "Art 29", "artistas": ["Art 29"], "archivo": "canciones/29.mp3" },
+  { "titulo": "Nombre 30", "artista": "Art 30", "artistas": ["Art 30"], "archivo": "canciones/30.mp3" },
+  { "titulo": "Nombre 31", "artista": "Art 31", "artistas": ["Art 31"], "archivo": "canciones/31.mp3" },
+  { "titulo": "Nombre 32", "artista": "Art 32", "artistas": ["Art 32"], "archivo": "canciones/32.mp3" },
+  { "titulo": "Nombre 33", "artista": "Art 33", "artistas": ["Art 33"], "archivo": "canciones/33.mp3" },
+  { "titulo": "Nombre 34", "artista": "Art 34", "artistas": ["Art 34"], "archivo": "canciones/34.mp3" },
+  { "titulo": "Nombre 35", "artista": "Art 35", "artistas": ["Art 35"], "archivo": "canciones/35.mp3" },
+  { "titulo": "Nombre 36", "artista": "Art 36", "artistas": ["Art 36"], "archivo": "canciones/36.mp3" },
+  { "titulo": "Nombre 37", "artista": "Art 37", "artistas": ["Art 37"], "archivo": "canciones/37.mp3" }
+
 
 ]
